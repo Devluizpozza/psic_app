@@ -1,4 +1,5 @@
 import 'package:estacionaqui/app/components/ui/Scaffold_UI.dart';
+import 'package:estacionaqui/app/modules/home/home_controller.dart';
 import 'package:estacionaqui/app/modules/home/sections/good_news_section.dart';
 import 'package:estacionaqui/app/modules/home/sections/motivation_section.dart';
 import 'package:estacionaqui/app/routes/app_routes.dart';
@@ -7,7 +8,7 @@ import 'package:estacionaqui/app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
 
   @override
@@ -57,19 +58,21 @@ class HomeView extends StatelessWidget {
       ),
       title: 'Início',
       backgroundColor: Colors.white,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          MotivationSection(),
-          const SizedBox(height: 40),
-          GoodNewsSection(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            MotivationSection(),
+            const SizedBox(height: 40),
+            GoodNewsSection(),
+          ],
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         elevation: 2.0,
         backgroundColor: AppColors.softPeach,
-        onPressed: () => Get.toNamed(AppRoutes.map),
+        onPressed: () => Get.toNamed(AppRoutes.patient_triage),
         child: const Icon(Icons.reviews_outlined, color: Colors.black),
       ),
     );

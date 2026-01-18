@@ -4,8 +4,8 @@ import 'package:estacionaqui/app/modules/login/login_bindings.dart';
 import 'package:estacionaqui/app/modules/login/login_view.dart';
 import 'package:estacionaqui/app/modules/login/register_user_bindings.dart';
 import 'package:estacionaqui/app/modules/login/register_user_view.dart';
-import 'package:estacionaqui/app/modules/sms/confirm_sms_code_bindings.dart';
-import 'package:estacionaqui/app/modules/sms/confirm_sms_code_view.dart';
+import 'package:estacionaqui/app/modules/patient/triage/patient_triage_bindings.dart';
+import 'package:estacionaqui/app/modules/patient/triage/patient_triage_view.dart';
 import 'package:estacionaqui/app/modules/user/user_profile/user_profile_bindings.dart';
 import 'package:estacionaqui/app/modules/user/user_profile/user_profile_view.dart';
 import 'package:estacionaqui/app/routes/app_routes.dart';
@@ -35,9 +35,9 @@ abstract class AppPages {
       binding: UserProfileBindings(),
     ),
     GetPage(
-      name: AppRoutes.confirm_sms_code,
-      page: () => ConfirmSmsCodeView(),
-      binding: ConfirmSmsCodeBindings(),
+      name: AppRoutes.patient_triage,
+      page: () => PatientTriageView(),
+      binding: PatientTriageBindings(),
     ),
     GetPage(name: AppRoutes.home, page: () => AuthStateWidget()),
   ];

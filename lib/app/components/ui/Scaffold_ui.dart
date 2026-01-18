@@ -11,6 +11,7 @@ class ScaffoldUI extends StatelessWidget {
   final Drawer? drawer;
   final AppBar? appBar;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
+  final List<Widget>? actions;
 
   const ScaffoldUI({
     super.key,
@@ -22,6 +23,7 @@ class ScaffoldUI extends StatelessWidget {
     this.drawer,
     this.appBar,
     this.floatingActionButtonLocation,
+    this.actions,
   });
 
   @override
@@ -34,27 +36,7 @@ class ScaffoldUI extends StatelessWidget {
       drawer: drawer,
       appBar:
           appBar ??
-          AppBar(
-            elevation: 0,
-            centerTitle: true,
-            backgroundColor: AppColors.mentalEase.withOpacity(0.18),
-            foregroundColor: Colors.white,
-            leading:
-                showBackButton
-                    ? IconButton(
-                      icon: const Icon(Icons.arrow_back_ios_new_rounded),
-                      onPressed: () => Navigator.of(context).maybePop(),
-                    )
-                    : null,
-            title: Text(
-              title,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 0.3,
-              ),
-            ),
-          ),
+          AppBar(title: Text(title), centerTitle: true, actions: actions),
       body: Stack(
         children: [
           const SoftBackgroundDecoration(),
