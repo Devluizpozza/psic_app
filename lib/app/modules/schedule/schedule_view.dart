@@ -1,21 +1,21 @@
 import 'package:estacionaqui/app/components/ui/Scaffold_UI.dart';
-import 'package:estacionaqui/app/modules/home/home_controller.dart';
 import 'package:estacionaqui/app/modules/home/sections/good_news_section.dart';
 import 'package:estacionaqui/app/modules/home/sections/motivation_section.dart';
+import 'package:estacionaqui/app/modules/schedule/schedule_controller.dart';
 import 'package:estacionaqui/app/routes/app_routes.dart';
 import 'package:estacionaqui/app/services/auth_manager.dart';
 import 'package:estacionaqui/app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeView extends GetView<HomeController> {
-  const HomeView({super.key});
+class ScheduleView extends GetView<ScheduleController> {
+  const ScheduleView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ScaffoldUI(
       appBar: AppBar(
-        title: Text("Bem-Vindo"),
+        title: Text("Agendamento"),
         centerTitle: true,
         actions: [
           Padding(

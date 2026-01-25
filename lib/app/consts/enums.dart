@@ -16,3 +16,7 @@ enum ActionType {
   request_accepted,
   request_refused,
 }
+
+enum SpecialtyType { none, clinico, psicanalista, infatil, familiar }
+
+enum UserType { none, psychologist, patient }

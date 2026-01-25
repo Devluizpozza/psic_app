@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class HomeController extends GetxController
+class ScheduleController extends GetxController
     with GetSingleTickerProviderStateMixin, RouteAware {
   late AnimationController animationController;
   late List<Animation<Offset>> animations;

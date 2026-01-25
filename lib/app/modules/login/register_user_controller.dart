@@ -1,3 +1,4 @@
+import 'package:estacionaqui/app/consts/enums.dart';
 import 'package:estacionaqui/app/handlers/snack_bar_handler.dart';
 import 'package:estacionaqui/app/models/app_user_model.dart';
 import 'package:estacionaqui/app/modules/user/user_controller.dart';
@@ -56,6 +57,7 @@ class RegisterUserController extends GetxController {
                 ? contatoController.text
                 : "+55${contatoController.text}",
         email: emailController.text,
+        userType: UserType.patient,
         createAt: DateTime.now(),
       );
       bool success = await appUserRepository.create(userToSave);
