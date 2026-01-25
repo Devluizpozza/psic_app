@@ -1,11 +1,13 @@
 import 'package:estacionaqui/app/consts/enums.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class PatientTriageController extends GetxController {
   final Rx<FeelsType?> feels = Rx<FeelsType?>(null);
   final Rx<AnsietyType?> anxiety = Rx<AnsietyType?>(null);
-
+  final TextEditingController difficultyController = TextEditingController();
   final difficulty = ''.obs;
+
   List<FeelsType> get feelsOptions =>
       FeelsType.values.where((e) => (e.name != FeelsType.none.name)).toList();
   List<AnsietyType> get anxietyOptions =>
@@ -25,7 +27,7 @@ class PatientTriageController extends GetxController {
     final data = {
       'feels': feels.value,
       'anxiety': anxiety.value,
-      'difficulty': difficulty.value,
+      'difficulty': difficultyController.text,
     };
     print('Triagem enviada: $data');
   }

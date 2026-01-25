@@ -1,11 +1,10 @@
 import 'package:estacionaqui/app/components/ui/input_container_ui.dart';
-import 'package:estacionaqui/app/modules/patient/triage/patrient_triage_controller.dart';
 import 'package:flutter/material.dart';
 
 class DifficultyField extends StatelessWidget {
-  final PatientTriageController controller;
+  final void Function(String) onChanged;
 
-  const DifficultyField(this.controller, {super.key});
+  const DifficultyField(this.onChanged, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class DifficultyField extends StatelessWidget {
           labelText: 'Principal dificuldade',
           hintText: 'Se quiser, descreva com suas próprias palavras...',
         ),
-        onChanged: controller.setDifficulty,
+        onChanged: onChanged,
       ),
     );
   }

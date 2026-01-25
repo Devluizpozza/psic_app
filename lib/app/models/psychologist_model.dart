@@ -1,41 +1,37 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:estacionaqui/app/consts/enums.dart';
-import 'package:estacionaqui/app/services/extensions.dart';
 
-class AppUser extends Equatable {
+class Psychologist extends Equatable {
   final String uid;
   final String name;
-  final String contato;
+  final String contact;
   final String email;
   final String imageUrl;
-  final UserType userType;
-
+  final SpecialtyType specialty;
   final DateTime createAt;
 
-  const AppUser({
+  const Psychologist({
     required this.uid,
     required this.name,
-    required this.contato,
+    required this.contact,
     required this.email,
     this.imageUrl = '',
-    required this.userType,
     required this.createAt,
+    this.specialty = SpecialtyType.none,
   });
 
-  factory AppUser.fromJson(Map<String, dynamic> map) {
-    return AppUser(
+  factory Psychologist.fromJson(Map<String, dynamic> map) {
+    return Psychologist(
       uid: map['uid'] ?? '',
       name: map['name'] ?? '',
-      contato: map['contato'] ?? '',
+      contact: map['contact'] ?? '',
       email: map['email'] ?? '',
       imageUrl: map['imageUrl'] ?? '',
-      userType:
-          map['userType'] != null
-              ? UserType.values.firstWhere(
-                (userType) => userType.name.equals(map['userType']),
-              )
-              : UserType.none,
+      specialty: SpecialtyType.values.firstWhere(
+        (e) => e.name == map['specialty'],
+        orElse: () => SpecialtyType.none,
+      ),
       createAt: (map['createAt'] as Timestamp).toDate(),
     );
   }
@@ -44,38 +40,33 @@ class AppUser extends Equatable {
     return {
       'uid': uid,
       'name': name,
-      'contato': contato,
+      'contact': contact,
       'email': email,
       'imageUrl': imageUrl,
-      'userType': userType,
+      'specialty': specialty.name,
       'createAt': createAt,
     };
   }
 
-  factory AppUser.empty() {
-    return AppUser(
+  factory Psychologist.empty() {
+    return Psychologist(
       uid: '',
       name: '',
-      contato: '',
+      contact: '',
       email: '',
-      userType: UserType.none,
+      specialty: SpecialtyType.none,
       createAt: DateTime.now(),
     );
   }
 
-  factory AppUser.fromMap(Map<String, dynamic> map) {
-    return AppUser(
+  factory Psychologist.fromMap(Map<String, dynamic> map) {
+    return Psychologist(
       uid: map['uid'] ?? '',
       name: map['name'] ?? '',
-      contato: map['contato'] ?? '',
+      contact: map['contact'] ?? '',
       email: map['email'] ?? '',
       imageUrl: map['imageUrl'] ?? '',
-      userType:
-          map['userType'] != null
-              ? UserType.values.firstWhere(
-                (userType) => userType.name.equals(map['userType']),
-              )
-              : UserType.none,
+      specialty: map['specialty'] ?? SpecialtyType.none,
       createAt:
           (map['createAt'] is Timestamp)
               ? (map['createAt'] as Timestamp).toDate()
@@ -84,20 +75,20 @@ class AppUser extends Equatable {
     );
   }
 
-  AppUser copyWith(Map<String, dynamic> newer) {
+  Psychologist copyWith(Map<String, dynamic> newer) {
     Map<String, dynamic> current = toJson();
     Map<String, dynamic> merged = {...current, ...newer};
-    return AppUser.fromJson(merged);
+    return Psychologist.fromJson(merged);
   }
 
   @override
   List<Object?> get props => [
     uid,
     name,
-    contato,
+    contact,
     email,
     imageUrl,
-    userType,
+    specialty,
     createAt,
   ];
 }

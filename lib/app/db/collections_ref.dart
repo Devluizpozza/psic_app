@@ -3,7 +3,7 @@ import 'package:estacionaqui/app/db/collections.dart';
 import 'package:estacionaqui/app/db/db.dart';
 import 'package:estacionaqui/app/models/app_user_model.dart';
 import 'package:estacionaqui/app/models/log_model.dart';
-
+import 'package:estacionaqui/app/models/psychologist_model.dart';
 
 abstract class CollectionsRef {
   static CollectionReference get initialValue =>
@@ -30,6 +30,15 @@ abstract class CollectionsRef {
           return log.toJson();
         },
       );
-
-
+  static CollectionReference<Psychologist> get psychologist => DB
+      .firestoreInstance
+      .collection(Collections.psychologist)
+      .withConverter<Psychologist>(
+        fromFirestore: (snapshot, _) {
+          return Psychologist.fromJson(snapshot.data()!);
+        },
+        toFirestore: (Psychologist psychologist, _) {
+          return psychologist.toJson();
+        },
+      );
 }
