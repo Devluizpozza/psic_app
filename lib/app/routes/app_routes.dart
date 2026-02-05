@@ -16,4 +16,5 @@ abstract class AppRoutes {
   static const String parking_detail = '/parkingDetail';
   static const String vehicle_list = '/vehicleList';
   static const String vehicleAdd = '/vehicleAdd';
+  static const String agenda = '/agenda';
 }

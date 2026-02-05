@@ -10,7 +10,6 @@ class AppUser extends Equatable {
   final String email;
   final String imageUrl;
   final UserType userType;
-
   final DateTime createAt;
 
   const AppUser({

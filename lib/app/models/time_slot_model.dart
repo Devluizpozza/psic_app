@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 
-class TimeSlot {
+class TimeSlot extends Equatable {
   final String uid;
   final String psychologistId;
   final DateTime startAt;
@@ -8,7 +9,7 @@ class TimeSlot {
   final bool isAvailable;
   final String? patientId;
 
-  TimeSlot({
+  const TimeSlot({
     required this.uid,
     required this.psychologistId,
     required this.startAt,

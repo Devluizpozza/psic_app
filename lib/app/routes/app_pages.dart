@@ -1,3 +1,5 @@
+import 'package:estacionaqui/app/modules/agenda/agenda_bindings.dart';
+import 'package:estacionaqui/app/modules/agenda/agenda_view.dart';
 import 'package:estacionaqui/app/modules/home/home_bindings.dart';
 import 'package:estacionaqui/app/modules/home/home_view.dart';
 import 'package:estacionaqui/app/modules/login/login_bindings.dart';
@@ -20,7 +22,7 @@ abstract class AppPages {
       binding: LoginBinginds(),
     ),
     GetPage(
-      name: AppRoutes.home,
+      name: AppRoutes.initial,
       page: () => HomeView(),
       binding: HomeBindings(),
     ),
@@ -38,6 +40,11 @@ abstract class AppPages {
       name: AppRoutes.patient_triage,
       page: () => PatientTriageView(),
       binding: PatientTriageBindings(),
+    ),
+    GetPage(
+      name: AppRoutes.agenda,
+      page: () => AgendaView(),
+      binding: AgendaBindings(),
     ),
     GetPage(name: AppRoutes.home, page: () => AuthStateWidget()),
   ];
