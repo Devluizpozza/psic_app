@@ -4,6 +4,8 @@ import 'package:estacionaqui/app/db/db.dart';
 import 'package:estacionaqui/app/models/app_user_model.dart';
 import 'package:estacionaqui/app/models/log_model.dart';
 import 'package:estacionaqui/app/models/psychologist_model.dart';
+import 'package:estacionaqui/app/models/schedule_model.dart';
+import 'package:estacionaqui/app/models/time_slot_model.dart';
 
 abstract class CollectionsRef {
   static CollectionReference get initialValue =>
@@ -39,6 +41,31 @@ abstract class CollectionsRef {
         },
         toFirestore: (Psychologist psychologist, _) {
           return psychologist.toJson();
+        },
+      );
+
+  static CollectionReference<TimeSlot> timeSlot(psychologistId) => DB
+      .firestoreInstance
+      .collection(Collections.psychologist)
+      .doc(psychologistId)
+      .collection(Collections.time_slot)
+      .withConverter<TimeSlot>(
+        fromFirestore: (snapshot, _) {
+          return TimeSlot.fromJson(snapshot.data()!);
+        },
+        toFirestore: (TimeSlot timeSlot, _) {
+          return timeSlot.toJson();
+        },
+      );
+
+  static CollectionReference<Schedule> get schedule => DB.firestoreInstance
+      .collection(Collections.schedule)
+      .withConverter<Schedule>(
+        fromFirestore: (snapshot, _) {
+          return Schedule.fromJson(snapshot.data()!);
+        },
+        toFirestore: (Schedule timeSlot, _) {
+          return timeSlot.toJson();
         },
       );
 }

@@ -5,4 +5,6 @@ abstract class Collections {
   static const String app_user = 'appUser';
   static const String log = 'log';
   static const String psychologist = 'psychologist';
+  static const String time_slot = 'timeSlot';
+  static const String schedule = 'schedule';
 }

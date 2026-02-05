@@ -20,7 +20,7 @@ class AppWidget extends StatelessWidget {
       //   Get.put(AuthManager());
       // }),
       getPages: AppPages.pages,
-      initialRoute: AppRoutes.home,
+      initialRoute: AppRoutes.initial,
       fallbackLocale: Locale('pt', 'BR'),
       navigatorObservers: [routeObserver],
     );

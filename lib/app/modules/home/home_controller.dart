@@ -1,14 +1,23 @@
 import 'package:estacionaqui/app/consts/enums.dart';
 import 'package:estacionaqui/app/db/collections.dart';
 import 'package:estacionaqui/app/db/db.dart';
+import 'package:estacionaqui/app/handlers/snack_bar_handler.dart';
+import 'package:estacionaqui/app/models/event_date_time_model.dart';
 import 'package:estacionaqui/app/models/psychologist_model.dart';
+import 'package:estacionaqui/app/models/schedule_model.dart';
+import 'package:estacionaqui/app/models/time_slot_model.dart';
 import 'package:estacionaqui/app/repositories/psychologist_repository.dart';
+import 'package:estacionaqui/app/repositories/schedule_repository.dart';
+import 'package:estacionaqui/app/repositories/time_slot_repository.dart';
+import 'package:estacionaqui/app/utils/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeController extends GetxController
     with GetSingleTickerProviderStateMixin, RouteAware {
+  final TimeSlotRepository timeSlotRepository = TimeSlotRepository();
+  final ScheduleRepository scheduleRepository = ScheduleRepository();
   late AnimationController animationController;
   late List<Animation<Offset>> animations;
 
@@ -89,6 +98,65 @@ class HomeController extends GetxController
       print("$success");
     } catch (e) {
       throw Exception("$e");
+    }
+  }
+
+  void createTimeSlot() async {
+    try {
+      String psycId = "EtnhhmQiCm69W3kmSAFr";
+      final now = DateTime.now();
+      final startAtToSave = DateTime(now.year, now.month, now.day, 16, 0);
+      final endAtToSave = startAtToSave.add(const Duration(minutes: 50));
+      TimeSlot timeSlotToSave = TimeSlot(
+        uid: DB.generateUID(Collections.time_slot),
+        psychologistId: psycId,
+        startAt: startAtToSave,
+        endAt: endAtToSave,
+        isAvailable: true,
+      );
+      bool success = await timeSlotRepository.create(
+        timeSlotToSave.psychologistId,
+        timeSlotToSave,
+      );
+      if (success) {
+        SnackBarHandler.snackBarSuccess(
+          "Sucesso, ${timeSlotToSave.uid} criado",
+        );
+      }
+    } catch (e) {
+      Logger.info(e.toString());
+    }
+  }
+
+  void createSchedule() async {
+    try {
+      final now = DateTime.now();
+      final startAtToSave = DateTime(now.year, now.month, now.day, 16, 0);
+      final endAtToSave = startAtToSave.add(const Duration(minutes: 50));
+      EventDateTime eventDateTimeToSave = EventDateTime(
+        createdAt: DateTime.now(),
+        endAt: endAtToSave,
+        startAt: startAtToSave,
+        timeZone: "",
+      );
+      Schedule scheduleToSave = Schedule(
+        uid: DB.generateUID(Collections.schedule),
+        psychologistId: "EtnhhmQiCm69W3kmSAFr",
+        ownerId: "EtnhhmQiCm69W3kmSAFr",
+        statusType: ScheduleStatusType.none,
+        createdAt: DateTime.now(),
+        eventDateTime: eventDateTimeToSave,
+        metadata: {},
+        updatedAt: DateTime.now(),
+      );
+      bool success = await scheduleRepository.create(scheduleToSave);
+      if (success) {
+        SnackBarHandler.snackBarSuccess(
+          "Sucesso, ${scheduleToSave.uid} criado",
+        );
+      }
+    } catch (e) {
+      Logger.info(e.toString());
     }
   }
 }

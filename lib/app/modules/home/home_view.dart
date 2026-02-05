@@ -72,7 +72,8 @@ class HomeView extends GetView<HomeController> {
       floatingActionButton: FloatingActionButton(
         elevation: 2.0,
         backgroundColor: AppColors.softPeach,
-        onPressed: () => Get.toNamed(AppRoutes.patient_triage),
+        // onPressed: () => Get.toNamed(AppRoutes.patient_triage),
+        onPressed: controller.createSchedule,
         // onPressed: controller.createPsychologist,
         child: const Icon(Icons.reviews_outlined, color: Colors.black),
       ),

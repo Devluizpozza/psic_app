@@ -1,5 +1,10 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:estacionaqui/app/db/collections.dart';
+import 'package:estacionaqui/app/db/db.dart';
+import 'package:estacionaqui/app/models/time_slot_model.dart';
+
 abstract class CollectionsGroupRef {
   // static Query<Follower> get follower => DB.firestoreInstance
   //     .collectionGroup(Collections.follower)
@@ -22,4 +27,15 @@ abstract class CollectionsGroupRef {
   //         return scoreBySport.toJson();
   //       },
   //     );
+
+  static Query<TimeSlot> get timeSlot => DB.firestoreInstance
+      .collectionGroup(Collections.time_slot)
+      .withConverter<TimeSlot>(
+        fromFirestore: (snapshot, _) {
+          return TimeSlot.fromJson(snapshot.data()!);
+        },
+        toFirestore: (TimeSlot timeSlot, _) {
+          return timeSlot.toJson();
+        },
+      );
 }

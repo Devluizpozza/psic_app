@@ -20,3 +20,7 @@ enum ActionType {
 enum SpecialtyType { none, clinico, psicanalista, infatil, familiar }
 
 enum UserType { none, psychologist, patient }
+
+enum ScheduleStatusType { none, scheduled, requested, cancelled }
+
+enum ScheduleType { none, single, recurring }
