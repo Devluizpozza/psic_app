@@ -1,12 +1,12 @@
-import 'package:estacionaqui/app/components/ui/Scaffold_UI.dart';
-import 'package:estacionaqui/app/modules/home/home_controller.dart';
-import 'package:estacionaqui/app/modules/home/sections/good_news_section.dart';
-import 'package:estacionaqui/app/modules/home/sections/motivation_section.dart';
-import 'package:estacionaqui/app/routes/app_routes.dart';
-import 'package:estacionaqui/app/services/auth_manager.dart';
-import 'package:estacionaqui/app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psicApp/app/components/ui/Scaffold_UI.dart';
+import 'package:psicApp/app/modules/home/home_controller.dart';
+import 'package:psicApp/app/modules/home/sections/good_news_section.dart';
+import 'package:psicApp/app/modules/home/sections/motivation_section.dart';
+import 'package:psicApp/app/routes/app_routes.dart';
+import 'package:psicApp/app/services/auth_manager.dart';
+import 'package:psicApp/app/utils/app_colors.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
@@ -72,9 +72,8 @@ class HomeView extends GetView<HomeController> {
       floatingActionButton: FloatingActionButton(
         elevation: 2.0,
         backgroundColor: AppColors.softPeach,
-        // onPressed: () => Get.toNamed(AppRoutes.patient_triage),
-        onPressed: controller.createSchedule,
-        // onPressed: controller.createPsychologist,
+        onPressed: () => Get.toNamed(AppRoutes.patient_triage),
+        // onPressed: () => controller.createTimeSlot(),
         child: const Icon(Icons.reviews_outlined, color: Colors.black),
       ),
     );

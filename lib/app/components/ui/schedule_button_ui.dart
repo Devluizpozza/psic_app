@@ -1,5 +1,5 @@
-// import 'package:estacionaqui/app/modules/patient/triage/patrient_triage_controller.dart';
-// import 'package:estacionaqui/app/utils/app_colors.dart';
+// import 'package:psicApp/app/modules/patient/triage/patrient_triage_controller.dart';
+// import 'package:psicApp/app/utils/app_colors.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 

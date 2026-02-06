@@ -1,14 +1,14 @@
-import 'package:estacionaqui/app/handlers/snack_bar_handler.dart';
-import 'package:estacionaqui/app/models/app_user_model.dart';
-import 'package:estacionaqui/app/modules/user/user_controller.dart';
-import 'package:estacionaqui/app/repositories/app_user_repository.dart';
-import 'package:estacionaqui/app/routes/app_routes.dart';
-import 'package:estacionaqui/app/utils/app_colors.dart';
-import 'package:estacionaqui/app/utils/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:psicApp/app/handlers/snack_bar_handler.dart';
+import 'package:psicApp/app/models/app_user_model.dart';
+import 'package:psicApp/app/modules/user/user_controller.dart';
+import 'package:psicApp/app/repositories/app_user_repository.dart';
+import 'package:psicApp/app/routes/app_routes.dart';
+import 'package:psicApp/app/utils/app_colors.dart';
+import 'package:psicApp/app/utils/logger.dart';
 
 class AuthManager extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -47,27 +47,15 @@ class AuthManager extends GetxController {
 
   static AuthManager get to => Get.find<AuthManager>();
 
-  Future<void> signOut() async {
-    await _auth.signOut();
-    Get.toNamed(AppRoutes.home);
-  }
-
-  void handleAuthChanged(User? user) async {
-    if (isManualLogin) {
-      Logger.info("handleAuthChanged → Ignorado, login manual em andamento.");
-      return;
-    }
+  void handleAuthChanged(User? user) {
+    if (isManualLogin) return;
 
     if (user == null) {
-      Logger.info("handleAuthChanged → Usuário deslogado.");
+      Logger.info("Usuário deslogado");
       UserController.instance.clear();
-      Get.offAllNamed('/login');
     } else {
-      Logger.info("handleAuthChanged → Usuário logado. Buscando dados...");
-      await UserController.instance.fetch(user.uid);
-      if (user.uid.isNotEmpty) {
-        Get.offAllNamed('/home');
-      }
+      Logger.info("Usuário logado");
+      UserController.instance.fetch(user.uid);
     }
   }
 
@@ -86,11 +74,14 @@ class AuthManager extends GetxController {
             AppUser remoteUser = await appUserRepository.fetch(user.uid);
             if (remoteUser.name.isEmpty) {
               Get.toNamed(
-                AppRoutes.register_user,
+                AppRoutes.select_role,
                 arguments: {userUID: user.uid, phoneNumber: phoneNumber},
               );
             } else {
-              Get.toNamed(AppRoutes.initial, arguments: userUID);
+              UserController.instance.user = remoteUser;
+              Get.offAllNamed(AppRoutes.initial);
+
+              SnackBarHandler.snackBarSuccessLogin(remoteUser.name);
             }
           }
         },
@@ -142,7 +133,7 @@ class AuthManager extends GetxController {
 
           if (remoteUser.name.isEmpty) {
             Get.toNamed(
-              AppRoutes.register_user,
+              AppRoutes.select_role,
               arguments: {
                 'userUID': user.uid,
                 'email': email,
@@ -214,10 +205,17 @@ class AuthManager extends GetxController {
                   phoneNumber,
                 );
               },
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all(AppColors.lightBlue),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                backgroundColor: AppColors.therapyGreen,
               ),
-              child: Text("Confirmar"),
+              child: const Text(
+                "Confirmar",
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
             ),
           ],
         ),
@@ -255,7 +253,7 @@ class AuthManager extends GetxController {
         if (remoteUser.name.isEmpty) {
           Get.back();
           Get.toNamed(
-            AppRoutes.register_user,
+            AppRoutes.select_role,
             arguments: {'userUID': user.uid, 'phoneNumber': phoneNumber},
           );
         } else {
@@ -270,5 +268,11 @@ class AuthManager extends GetxController {
       isManualLogin = false;
       Logger.info(e.toString());
     }
+  }
+
+  Future<void> signOut() async {
+    await _auth.signOut();
+    UserController.instance.clear();
+    Get.offAllNamed(AppRoutes.initial);
   }
 }

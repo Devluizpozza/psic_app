@@ -1,7 +1,7 @@
-import 'package:estacionaqui/app/modules/login/login_controller.dart';
 import 'package:get/get.dart';
+import 'package:psicApp/app/modules/login/login_controller.dart';
 
-class LoginBinginds extends Bindings {
+class LoginBindings extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<LoginController>(() => LoginController());

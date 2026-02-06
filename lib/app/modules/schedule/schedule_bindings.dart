@@ -1,5 +1,5 @@
-import 'package:estacionaqui/app/modules/schedule/schedule_controller.dart';
 import 'package:get/get.dart';
+import 'package:psicApp/app/modules/schedule/schedule_controller.dart';
 
 class HomeBindings extends Bindings {
   @override

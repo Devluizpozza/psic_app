@@ -2,7 +2,7 @@
 
 enum FeelsType { none, bem, neutro, mal }
 
-enum AnsietyType { none, baixo, medio, alto, insuportavel }
+enum AnxietyType { none, baixo, medio, alto, insuportavel }
 
 enum VehicleType { none, car, motorcycle }
 
@@ -19,7 +19,7 @@ enum ActionType {
 
 enum SpecialtyType { none, clinico, psicanalista, infatil, familiar }
 
-enum UserType { none, psychologist, patient }
+enum UserRoleType { none, psychologist, patient }
 
 enum ScheduleStatusType { none, scheduled, requested, cancelled }
 

@@ -1,14 +1,14 @@
 import 'dart:io';
 
-import 'package:estacionaqui/app/handlers/snack_bar_handler.dart';
-import 'package:estacionaqui/app/models/app_user_model.dart';
-import 'package:estacionaqui/app/modules/user/user_controller.dart';
-import 'package:estacionaqui/app/repositories/app_user_repository.dart';
-import 'package:estacionaqui/app/services/image_picker.dart';
-import 'package:estacionaqui/app/utils/fomatter.dart';
-import 'package:estacionaqui/app/utils/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psicApp/app/handlers/snack_bar_handler.dart';
+import 'package:psicApp/app/models/app_user_model.dart';
+import 'package:psicApp/app/modules/user/user_controller.dart';
+import 'package:psicApp/app/repositories/app_user_repository.dart';
+import 'package:psicApp/app/services/image_picker.dart';
+import 'package:psicApp/app/utils/fomatter.dart';
+import 'package:psicApp/app/utils/logger.dart';
 
 class UserProfileController extends GetxController {
   final Rx<bool> _isEditing = Rx<bool>(false);

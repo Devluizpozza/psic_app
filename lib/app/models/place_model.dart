@@ -1,11 +1,11 @@
 // ignore_for_file: must_be_immutable, depend_on_referenced_packages
 import 'package:equatable/equatable.dart';
-import 'package:estacionaqui/app/models/geo_fire_point_model.dart';
-import 'package:estacionaqui/app/models/geo_location_point_model.dart';
-import 'package:estacionaqui/app/models/place_short_model.dart';
-import 'package:estacionaqui/app/services/geo_location_service.dart';
-import 'package:estacionaqui/app/utils/logger.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:psicApp/app/models/geo_fire_point_model.dart';
+import 'package:psicApp/app/models/geo_location_point_model.dart';
+import 'package:psicApp/app/models/place_short_model.dart';
+import 'package:psicApp/app/services/geo_location_service.dart';
+import 'package:psicApp/app/utils/logger.dart';
 
 class Place extends Equatable {
   String uid;

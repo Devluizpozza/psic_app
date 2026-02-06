@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.psic_app"
-    compileSdk = 35
+    compileSdk = 36
     ndkVersion = "27.0.12077973"
 
     compileOptions {
@@ -19,10 +19,10 @@ android {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
-      defaultConfig {
+    defaultConfig {
         applicationId = "com.example.psic_app"
-        minSdk = 23
-        targetSdk = 34
+        minSdk = flutter.minSdkVersion
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
     }

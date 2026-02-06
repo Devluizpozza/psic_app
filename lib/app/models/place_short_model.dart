@@ -1,8 +1,8 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:estacionaqui/app/models/geo_location_point_model.dart';
-import 'package:estacionaqui/app/models/place_model.dart';
-import 'package:estacionaqui/app/services/geo_location_service.dart';
+import 'package:psicApp/app/models/geo_location_point_model.dart';
+import 'package:psicApp/app/models/place_model.dart';
+import 'package:psicApp/app/services/geo_location_service.dart';
 
 class PlaceShort extends Place {
   PlaceShort({

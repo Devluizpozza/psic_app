@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:estacionaqui/app/db/collections.dart';
-import 'package:estacionaqui/app/db/collections_ref.dart';
-import 'package:estacionaqui/app/db/db.dart';
-import 'package:estacionaqui/app/models/app_user_model.dart';
-import 'package:estacionaqui/app/utils/logger.dart';
+import 'package:psicApp/app/db/collections.dart';
+import 'package:psicApp/app/db/collections_ref.dart';
+import 'package:psicApp/app/db/db.dart';
+import 'package:psicApp/app/models/app_user_model.dart';
+import 'package:psicApp/app/utils/logger.dart';
 
 class AppUserRepository extends DB {
   AppUserRepository();
@@ -20,7 +20,7 @@ class AppUserRepository extends DB {
   //   }
   // }
 
-  //fetch retornando usuário.empty caso ele nao exista(primeiro login);
+  // fetch retornando usuário.empty caso ele nao exista(primeiro login);
   Future<AppUser> fetch(String uid) async {
     try {
       DocumentSnapshot<AppUser> doc =

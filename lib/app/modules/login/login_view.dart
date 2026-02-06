@@ -1,7 +1,8 @@
-import 'package:estacionaqui/app/utils/fomatter.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:psicApp/app/utils/app_colors.dart';
+import 'package:psicApp/app/utils/fomatter.dart';
 
 import 'login_controller.dart';
 
@@ -10,7 +11,7 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFE8F0F6),
+      backgroundColor: AppColors.neutralMist,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -18,10 +19,10 @@ class LoginView extends GetView<LoginController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/images/logo_car.png', height: 140),
+                Image.asset('assets/images/logo.png', height: 140),
                 const SizedBox(height: 30),
                 const Text(
-                  "Bem-vindo ao EstacionAqui",
+                  "Bem-vindo ao PsicApp",
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -62,7 +63,7 @@ class LoginView extends GetView<LoginController> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      backgroundColor: Color(0xFF2980B9),
+                      backgroundColor: AppColors.therapyGreen,
                     ),
                     child: const Text(
                       "Entrar",
@@ -73,7 +74,7 @@ class LoginView extends GetView<LoginController> {
                 const SizedBox(height: 30),
                 const Text(
                   "ou entre com",
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: Color(0xFF2C3E50)),
                 ),
                 const SizedBox(height: 10),
                 GestureDetector(
@@ -84,7 +85,7 @@ class LoginView extends GetView<LoginController> {
                       borderRadius: BorderRadius.circular(50),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black12,
+                          color: Color(0xFF2C3E50),
                           blurRadius: 6,
                           offset: Offset(0, 2),
                         ),

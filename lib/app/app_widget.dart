@@ -1,7 +1,8 @@
-import 'package:estacionaqui/app/routes/app_pages.dart';
-import 'package:estacionaqui/app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psicApp/app/routes/app_pages.dart';
+import 'package:psicApp/app/routes/app_routes.dart';
+import 'package:psicApp/app/services/auth_manager.dart';
 
 class AppWidget extends StatelessWidget {
   final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
@@ -16,9 +17,9 @@ class AppWidget extends StatelessWidget {
       title: 'Portfólio Mobile',
       locale: Locale('pt', 'BR'),
       debugShowCheckedModeBanner: false,
-      // initialBinding: BindingsBuilder(() {
-      //   Get.put(AuthManager());
-      // }),
+      initialBinding: BindingsBuilder(() {
+        Get.put(AuthManager());
+      }),
       getPages: AppPages.pages,
       initialRoute: AppRoutes.initial,
       fallbackLocale: Locale('pt', 'BR'),

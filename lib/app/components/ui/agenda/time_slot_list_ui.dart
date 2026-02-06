@@ -1,6 +1,6 @@
-import 'package:estacionaqui/app/components/ui/agenda/time_slot_tile_ui.dart';
-import 'package:estacionaqui/app/models/time_slot_model.dart';
 import 'package:flutter/material.dart';
+import 'package:psicApp/app/components/ui/agenda/time_slot_tile_ui.dart';
+import 'package:psicApp/app/models/time_slot_model.dart';
 
 class TimeSlotListUI extends StatelessWidget {
   final List<TimeSlot> slots;

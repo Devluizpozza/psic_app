@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:estacionaqui/app/db/collections_ref.dart';
-import 'package:estacionaqui/app/db/db.dart';
-import 'package:estacionaqui/app/models/psychologist_model.dart';
-import 'package:estacionaqui/app/utils/logger.dart';
+import 'package:psicApp/app/db/collections_ref.dart';
+import 'package:psicApp/app/db/db.dart';
+import 'package:psicApp/app/models/psychologist_model.dart';
+import 'package:psicApp/app/utils/logger.dart';
 
 class PsychologistRepository extends DB {
   PsychologistRepository();
@@ -20,6 +20,17 @@ class PsychologistRepository extends DB {
     } catch (e) {
       Logger.info(e);
       return Future.error("Erro ao buscar psicólogo: $e");
+    }
+  }
+
+  Future<List<Psychologist>> list() async {
+    try {
+      final query = await CollectionsRef.psychologist.get();
+
+      return query.docs.map((doc) => doc.data()).toList();
+    } catch (e) {
+      Logger.info(e);
+      return [];
     }
   }
 

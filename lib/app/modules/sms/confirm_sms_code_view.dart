@@ -1,6 +1,6 @@
-import 'package:estacionaqui/app/modules/sms/confirm_sms_code_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psicApp/app/modules/sms/confirm_sms_code_controller.dart';
 
 class ConfirmSmsCodeView extends GetView<ConfirmSmsCodeController> {
   const ConfirmSmsCodeView({super.key});

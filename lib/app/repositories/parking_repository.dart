@@ -1,8 +1,8 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:estacionaqui/app/db/collections_ref.dart';
-// import 'package:estacionaqui/app/db/db.dart';
-// import 'package:estacionaqui/app/models/parking_model.dart';
-// import 'package:estacionaqui/app/utils/logger.dart';
+// import 'package:psicApp/app/db/collections_ref.dart';
+// import 'package:psicApp/app/db/db.dart';
+// import 'package:psicApp/app/models/parking_model.dart';
+// import 'package:psicApp/app/utils/logger.dart';
 
 // class ParkingRepository extends DB {
 //   ParkingRepository();

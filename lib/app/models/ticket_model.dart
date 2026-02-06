@@ -1,8 +1,8 @@
 // // ignore_for_file: must_be_immutable
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:equatable/equatable.dart';
-// import 'package:estacionaqui/app/consts/enums.dart';
-// import 'package:estacionaqui/app/models/vehicle_model.dart';
+// import 'package:psicApp/app/consts/enums.dart';
+// import 'package:psicApp/app/models/vehicle_model.dart';
 
 // class Ticket extends Equatable {
 //   final String uid;

@@ -1,10 +1,10 @@
-import 'package:estacionaqui/app/components/loading_widget.dart';
-import 'package:estacionaqui/app/modules/user/user_profile/user_profile_controller.dart';
-import 'package:estacionaqui/app/utils/app_colors.dart';
-import 'package:estacionaqui/app/utils/fomatter.dart';
-import 'package:estacionaqui/app/utils/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psicApp/app/components/loading_widget.dart';
+import 'package:psicApp/app/modules/user/user_profile/user_profile_controller.dart';
+import 'package:psicApp/app/utils/app_colors.dart';
+import 'package:psicApp/app/utils/fomatter.dart';
+import 'package:psicApp/app/utils/validator.dart';
 
 class UserProfileView extends GetView<UserProfileController> {
   const UserProfileView({super.key});

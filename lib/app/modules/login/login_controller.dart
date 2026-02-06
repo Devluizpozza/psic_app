@@ -1,15 +1,16 @@
-import 'package:estacionaqui/app/repositories/app_user_repository.dart';
-import 'package:estacionaqui/app/services/auth_manager.dart';
-import 'package:estacionaqui/app/utils/logger.dart';
-import 'package:estacionaqui/app/utils/regex.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:psicApp/app/repositories/app_user_repository.dart';
+import 'package:psicApp/app/services/auth_manager.dart';
+import 'package:psicApp/app/utils/logger.dart';
+import 'package:psicApp/app/utils/regex.dart';
 
 class LoginController extends GetxController {
   final Rx<String> _phoneNumber = ''.obs;
   final Rx<String> _smsCode = ''.obs;
   final AppUserRepository appUserRepository = AppUserRepository();
 
-  // final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   String get phoneNumber => Regex.only_digits(_phoneNumber.value);
 

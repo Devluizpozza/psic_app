@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:estacionaqui/app/utils/logger.dart';
 import 'package:http/http.dart' as http;
+import 'package:psicApp/app/utils/logger.dart';
 
 abstract class AddressMapService {
   static Future<Map<String, dynamic>?> getAddressFromCoordinates(
@@ -15,9 +15,7 @@ abstract class AddressMapService {
 
       final response = await http.get(
         url,
-        headers: {
-          'User-Agent': 'estacionaqui-app/1.0 (your_email@example.com)',
-        },
+        headers: {'User-Agent': 'psicApp-app/1.0 (your_email@example.com)'},
       );
 
       if (response.statusCode == 200) {

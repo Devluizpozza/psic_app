@@ -1,8 +1,8 @@
-import 'package:estacionaqui/app/modules/home/home_view.dart';
-import 'package:estacionaqui/app/modules/login/login_view.dart';
-import 'package:estacionaqui/app/services/auth_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psicApp/app/modules/home/home_view.dart';
+import 'package:psicApp/app/modules/login/login_view.dart';
+import 'package:psicApp/app/services/auth_manager.dart';
 
 class AuthStateWidget extends StatelessWidget {
   const AuthStateWidget({super.key});

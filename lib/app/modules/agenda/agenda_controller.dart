@@ -1,7 +1,7 @@
-import 'package:estacionaqui/app/models/time_slot_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:psicApp/app/models/time_slot_model.dart';
 
 class AgendaController extends GetxController {
   final Rx<DateTime> _selectedDay = DateTime.now().obs;

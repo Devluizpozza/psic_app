@@ -4,10 +4,10 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:estacionaqui/app/utils/logger.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
+import 'package:psicApp/app/utils/logger.dart';
 import 'package:uuid/uuid.dart';
 
 abstract class AppUtils {
