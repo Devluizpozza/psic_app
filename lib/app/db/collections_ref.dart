@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:estacionaqui/app/db/collections.dart';
-import 'package:estacionaqui/app/db/db.dart';
-import 'package:estacionaqui/app/models/app_user_model.dart';
-import 'package:estacionaqui/app/models/log_model.dart';
-import 'package:estacionaqui/app/models/psychologist_model.dart';
-import 'package:estacionaqui/app/models/schedule_model.dart';
-import 'package:estacionaqui/app/models/time_slot_model.dart';
+import 'package:psicApp/app/db/collections.dart';
+import 'package:psicApp/app/db/db.dart';
+import 'package:psicApp/app/models/app_user_model.dart';
+import 'package:psicApp/app/models/log_model.dart';
+import 'package:psicApp/app/models/psychologist_model.dart';
+import 'package:psicApp/app/models/schedule_model.dart';
+import 'package:psicApp/app/models/time_slot_model.dart';
 
 abstract class CollectionsRef {
   static CollectionReference get initialValue =>

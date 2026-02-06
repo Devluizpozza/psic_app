@@ -1,6 +1,6 @@
-import 'package:estacionaqui/app/components/ui/soft_bacground_decoration_ui.dart';
-import 'package:estacionaqui/app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:psicApp/app/components/ui/soft_bacground_decoration_ui.dart';
+import 'package:psicApp/app/utils/app_colors.dart';
 
 class ScaffoldUI extends StatelessWidget {
   final String title;
@@ -36,7 +36,12 @@ class ScaffoldUI extends StatelessWidget {
       drawer: drawer,
       appBar:
           appBar ??
-          AppBar(title: Text(title), centerTitle: true, actions: actions),
+          AppBar(
+            title: Text(title),
+            centerTitle: true,
+            actions: actions,
+            automaticallyImplyLeading: true,
+          ),
       body: Stack(
         children: [
           const SoftBackgroundDecoration(),

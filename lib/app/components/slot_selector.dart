@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:estacionaqui/app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:psicApp/app/utils/app_colors.dart';
 
 class SlotSelector extends StatefulWidget {
   final int initialValue;

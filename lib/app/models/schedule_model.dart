@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:estacionaqui/app/consts/enums.dart';
-import 'package:estacionaqui/app/models/event_date_time_model.dart';
-import 'package:estacionaqui/app/services/extensions.dart';
+import 'package:psicApp/app/consts/enums.dart';
+import 'package:psicApp/app/models/event_date_time_model.dart';
+import 'package:psicApp/app/services/extensions.dart';
 
 class Schedule extends Equatable {
   final String uid;
@@ -23,6 +23,8 @@ class Schedule extends Equatable {
     required this.updatedAt,
     required this.createdAt,
   });
+
+  String get type => statusType.name.toString();
 
   factory Schedule.fromJson(Map<String, dynamic> map) {
     return Schedule(
@@ -53,7 +55,7 @@ class Schedule extends Equatable {
       'ownerId': ownerId,
       'psychologistId': psychologistId,
       'eventDateTime': eventDateTime.toJson(),
-      'statusType': statusType,
+      'statusType': type,
       'metadata': metadata,
       'updatedAt': updatedAt,
       'createdAt': createdAt,
@@ -108,7 +110,7 @@ class Schedule extends Equatable {
     ownerId,
     psychologistId,
     eventDateTime,
-    statusType,
+    type,
     metadata,
     updatedAt,
     createdAt,

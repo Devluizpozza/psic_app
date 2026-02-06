@@ -1,6 +1,6 @@
-import 'package:estacionaqui/app/models/time_slot_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:psicApp/app/models/time_slot_model.dart';
 
 class ConfirmBookingSheetUI extends StatelessWidget {
   final TimeSlot slot;

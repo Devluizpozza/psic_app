@@ -1,7 +1,7 @@
-// import 'package:estacionaqui/app/db/collections.dart';
-// import 'package:estacionaqui/app/db/collections_ref.dart';
-// import 'package:estacionaqui/app/models/vehicle_model.dart';
-// import 'package:estacionaqui/app/utils/logger.dart';
+// import 'package:psicApp/app/db/collections.dart';
+// import 'package:psicApp/app/db/collections_ref.dart';
+// import 'package:psicApp/app/models/vehicle_model.dart';
+// import 'package:psicApp/app/utils/logger.dart';
 
 // class VehicleRepository {
 //   VehicleRepository();

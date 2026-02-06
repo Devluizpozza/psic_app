@@ -1,7 +1,7 @@
-import 'package:estacionaqui/app/modules/login/register_user_controller.dart';
-import 'package:estacionaqui/app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psicApp/app/modules/login/register_user_controller.dart';
+import 'package:psicApp/app/utils/app_colors.dart';
 
 class RegisterUserView extends GetView<RegisterUserController> {
   const RegisterUserView({super.key});

@@ -1,5 +1,5 @@
-import 'package:estacionaqui/app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:psicApp/app/utils/app_colors.dart';
 
 class MotivationSection extends StatelessWidget {
   const MotivationSection({super.key});

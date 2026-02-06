@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:estacionaqui/app/services/network_conectivity.dart';
+import 'package:psicApp/app/services/network_conectivity.dart';
 
 class DB {
   FirebaseFirestore firestore = FirebaseFirestore.instance;

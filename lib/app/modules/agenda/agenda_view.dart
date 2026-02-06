@@ -1,6 +1,6 @@
-import 'package:estacionaqui/app/modules/agenda/agenda_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:psicApp/app/modules/agenda/agenda_controller.dart';
 
 class AgendaView extends GetView<AgendaController> {
   const AgendaView({super.key});

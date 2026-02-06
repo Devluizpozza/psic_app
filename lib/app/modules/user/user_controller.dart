@@ -1,8 +1,8 @@
-import 'package:estacionaqui/app/models/app_user_model.dart';
-import 'package:estacionaqui/app/repositories/app_user_repository.dart';
-import 'package:estacionaqui/app/services/auth_manager.dart';
-import 'package:estacionaqui/app/utils/logger.dart';
 import 'package:get/get.dart';
+import 'package:psicApp/app/models/app_user_model.dart';
+import 'package:psicApp/app/repositories/app_user_repository.dart';
+import 'package:psicApp/app/services/auth_manager.dart';
+import 'package:psicApp/app/utils/logger.dart';
 
 class UserController extends GetxController {
   final Rx<AppUser?> _user = Rx<AppUser?>(null);

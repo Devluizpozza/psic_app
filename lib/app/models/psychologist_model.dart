@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:estacionaqui/app/consts/enums.dart';
+import 'package:psicApp/app/consts/enums.dart';
 
 class Psychologist extends Equatable {
   final String uid;

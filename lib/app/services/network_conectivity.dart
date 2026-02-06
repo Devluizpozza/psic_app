@@ -1,8 +1,9 @@
 import 'dart:async';
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:estacionaqui/app/utils/logger.dart';
-import 'package:get/get.dart';
 import 'dart:io';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:get/get.dart';
+import 'package:psicApp/app/utils/logger.dart';
 
 class NetworkConnectivity extends GetxController {
   final Rx<bool> _connected = true.obs;

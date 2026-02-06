@@ -1,7 +1,7 @@
 // // ignore_for_file: must_be_immutable
 // import 'package:equatable/equatable.dart';
-// import 'package:estacionaqui/app/consts/enums.dart';
-// import 'package:estacionaqui/app/services/extensions.dart';
+// import 'package:psicApp/app/consts/enums.dart';
+// import 'package:psicApp/app/services/extensions.dart';
 
 // class Car extends Equatable {
 //   final String uid;

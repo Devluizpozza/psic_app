@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
-import 'package:estacionaqui/app/consts/const.dart';
 import 'package:flutter/foundation.dart';
+import 'package:psicApp/app/consts/const.dart';
 
 class Logger {
   static void infow({String? message = ''}) {

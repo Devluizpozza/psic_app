@@ -1,10 +1,10 @@
-import 'package:estacionaqui/app/handlers/snack_bar_handler.dart';
-import 'package:estacionaqui/app/models/geo_fire_point_model.dart';
-import 'package:estacionaqui/app/models/geo_location_point_model.dart';
-import 'package:estacionaqui/app/services/geo_location_place_service.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:psicApp/app/handlers/snack_bar_handler.dart';
+import 'package:psicApp/app/models/geo_fire_point_model.dart';
+import 'package:psicApp/app/models/geo_location_point_model.dart';
+import 'package:psicApp/app/services/geo_location_place_service.dart';
 
 class GeolocationService extends GetxController {
   final Rx<PermissionStatus> _permissionStatus = Rx<PermissionStatus>(

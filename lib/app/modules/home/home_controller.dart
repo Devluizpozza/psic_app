@@ -1,23 +1,25 @@
-import 'package:estacionaqui/app/consts/enums.dart';
-import 'package:estacionaqui/app/db/collections.dart';
-import 'package:estacionaqui/app/db/db.dart';
-import 'package:estacionaqui/app/handlers/snack_bar_handler.dart';
-import 'package:estacionaqui/app/models/event_date_time_model.dart';
-import 'package:estacionaqui/app/models/psychologist_model.dart';
-import 'package:estacionaqui/app/models/schedule_model.dart';
-import 'package:estacionaqui/app/models/time_slot_model.dart';
-import 'package:estacionaqui/app/repositories/psychologist_repository.dart';
-import 'package:estacionaqui/app/repositories/schedule_repository.dart';
-import 'package:estacionaqui/app/repositories/time_slot_repository.dart';
-import 'package:estacionaqui/app/utils/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psicApp/app/consts/enums.dart';
+import 'package:psicApp/app/db/collections.dart';
+import 'package:psicApp/app/db/db.dart';
+import 'package:psicApp/app/handlers/snack_bar_handler.dart';
+import 'package:psicApp/app/models/event_date_time_model.dart';
+import 'package:psicApp/app/models/psychologist_model.dart';
+import 'package:psicApp/app/models/schedule_model.dart';
+import 'package:psicApp/app/models/time_slot_model.dart';
+import 'package:psicApp/app/repositories/psychologist_repository.dart';
+import 'package:psicApp/app/repositories/schedule_repository.dart';
+import 'package:psicApp/app/repositories/time_slot_repository.dart';
+import 'package:psicApp/app/utils/logger.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeController extends GetxController
     with GetSingleTickerProviderStateMixin, RouteAware {
   final TimeSlotRepository timeSlotRepository = TimeSlotRepository();
   final ScheduleRepository scheduleRepository = ScheduleRepository();
+  final PsychologistRepository psychologistRepository =
+      PsychologistRepository();
   late AnimationController animationController;
   late List<Animation<Offset>> animations;
 
@@ -85,8 +87,8 @@ class HomeController extends GetxController
   Future<void> createPsychologist() async {
     try {
       Psychologist psy = Psychologist(
-        name: "teste 3",
-        contact: "3",
+        name: "Joao Paulo figueiredo",
+        contact: "4899999999",
         createAt: DateTime.now(),
         email: "teste@gmail.com",
         uid: DB.generateUID(Collections.psychologist),
@@ -103,9 +105,9 @@ class HomeController extends GetxController
 
   void createTimeSlot() async {
     try {
-      String psycId = "EtnhhmQiCm69W3kmSAFr";
+      String psycId = "0ofc1z8JMCfpjO9MRvEy";
       final now = DateTime.now();
-      final startAtToSave = DateTime(now.year, now.month, now.day, 16, 0);
+      final startAtToSave = DateTime(now.year, now.month, now.day, 10, 0);
       final endAtToSave = startAtToSave.add(const Duration(minutes: 50));
       TimeSlot timeSlotToSave = TimeSlot(
         uid: DB.generateUID(Collections.time_slot),
@@ -155,6 +157,16 @@ class HomeController extends GetxController
           "Sucesso, ${scheduleToSave.uid} criado",
         );
       }
+    } catch (e) {
+      Logger.info(e.toString());
+    }
+  }
+
+  void listPsychologists() async {
+    try {
+      final List<Psychologist> psychologists =
+          await psychologistRepository.list();
+      print(psychologists);
     } catch (e) {
       Logger.info(e.toString());
     }

@@ -1,11 +1,11 @@
-import 'package:estacionaqui/app/handlers/snack_bar_handler.dart';
-import 'package:estacionaqui/app/models/app_user_model.dart';
-import 'package:estacionaqui/app/repositories/app_user_repository.dart';
-import 'package:estacionaqui/app/routes/app_routes.dart';
-import 'package:estacionaqui/app/utils/logger.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psicApp/app/handlers/snack_bar_handler.dart';
+import 'package:psicApp/app/models/app_user_model.dart';
+import 'package:psicApp/app/repositories/app_user_repository.dart';
+import 'package:psicApp/app/routes/app_routes.dart';
+import 'package:psicApp/app/utils/logger.dart';
 
 class ConfirmSmsCodeController extends GetxController {
   final TextEditingController codeController = TextEditingController();

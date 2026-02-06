@@ -1,10 +1,10 @@
-import 'package:estacionaqui/app/consts/enums.dart';
-import 'package:estacionaqui/app/db/collections.dart';
-import 'package:estacionaqui/app/db/db.dart';
-import 'package:estacionaqui/app/models/psychologist_model.dart';
-import 'package:estacionaqui/app/repositories/psychologist_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psicApp/app/consts/enums.dart';
+import 'package:psicApp/app/db/collections.dart';
+import 'package:psicApp/app/db/db.dart';
+import 'package:psicApp/app/models/psychologist_model.dart';
+import 'package:psicApp/app/repositories/psychologist_repository.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ScheduleController extends GetxController

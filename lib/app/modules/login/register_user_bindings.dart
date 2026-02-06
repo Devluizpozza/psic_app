@@ -1,5 +1,5 @@
-import 'package:estacionaqui/app/modules/login/register_user_controller.dart';
 import 'package:get/get.dart';
+import 'package:psicApp/app/modules/login/register_user_controller.dart';
 
 class RegisterUserBindings extends Bindings {
   @override

@@ -2,8 +2,8 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:estacionaqui/app/models/geo_fire_point_model.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:psicApp/app/models/geo_fire_point_model.dart';
 
 // ignore: must_be_immutable
 class GeolocationPoint extends GeoFirePoint with EquatableMixin {

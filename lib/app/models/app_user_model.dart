@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:estacionaqui/app/consts/enums.dart';
-import 'package:estacionaqui/app/services/extensions.dart';
+import 'package:psicApp/app/consts/enums.dart';
+import 'package:psicApp/app/services/extensions.dart';
 
 class AppUser extends Equatable {
   final String uid;
@@ -9,7 +9,7 @@ class AppUser extends Equatable {
   final String contato;
   final String email;
   final String imageUrl;
-  final UserType userType;
+  final UserRoleType userType;
   final DateTime createAt;
 
   const AppUser({
@@ -22,6 +22,8 @@ class AppUser extends Equatable {
     required this.createAt,
   });
 
+  String get type => userType.name.toString();
+
   factory AppUser.fromJson(Map<String, dynamic> map) {
     return AppUser(
       uid: map['uid'] ?? '',
@@ -31,10 +33,10 @@ class AppUser extends Equatable {
       imageUrl: map['imageUrl'] ?? '',
       userType:
           map['userType'] != null
-              ? UserType.values.firstWhere(
+              ? UserRoleType.values.firstWhere(
                 (userType) => userType.name.equals(map['userType']),
               )
-              : UserType.none,
+              : UserRoleType.none,
       createAt: (map['createAt'] as Timestamp).toDate(),
     );
   }
@@ -46,7 +48,7 @@ class AppUser extends Equatable {
       'contato': contato,
       'email': email,
       'imageUrl': imageUrl,
-      'userType': userType,
+      'userType': type,
       'createAt': createAt,
     };
   }
@@ -57,7 +59,7 @@ class AppUser extends Equatable {
       name: '',
       contato: '',
       email: '',
-      userType: UserType.none,
+      userType: UserRoleType.none,
       createAt: DateTime.now(),
     );
   }
@@ -71,10 +73,10 @@ class AppUser extends Equatable {
       imageUrl: map['imageUrl'] ?? '',
       userType:
           map['userType'] != null
-              ? UserType.values.firstWhere(
+              ? UserRoleType.values.firstWhere(
                 (userType) => userType.name.equals(map['userType']),
               )
-              : UserType.none,
+              : UserRoleType.none,
       createAt:
           (map['createAt'] is Timestamp)
               ? (map['createAt'] as Timestamp).toDate()
@@ -96,7 +98,7 @@ class AppUser extends Equatable {
     contato,
     email,
     imageUrl,
-    userType,
+    type,
     createAt,
   ];
 }

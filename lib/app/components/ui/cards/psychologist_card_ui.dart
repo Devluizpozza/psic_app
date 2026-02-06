@@ -1,39 +1,56 @@
-import 'package:estacionaqui/app/models/psychologist_model.dart';
-import 'package:estacionaqui/app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:psicApp/app/models/psychologist_model.dart';
+import 'package:psicApp/app/utils/app_colors.dart';
 
 class PsychologistCard extends StatelessWidget {
   final Psychologist psychologist;
+  final bool selected;
+  final Color selectedColor;
+  final VoidCallback? onTap;
 
-  const PsychologistCard({super.key, required this.psychologist});
+  const PsychologistCard({
+    super.key,
+    required this.psychologist,
+    this.selected = false,
+    this.selectedColor = AppColors.softMint,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Stack(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              circleAvatar(),
-              const SizedBox(width: 16),
-              Expanded(child: infoPsyc()),
-            ],
-          ),
-          Positioned(bottom: 4, right: 4, child: verifyIcon()),
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: selected ? selectedColor : Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          border:
+              selected
+                  ? Border.all(color: AppColors.mentalEase, width: 1.5)
+                  : null,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(selected ? 0.08 : 0.04),
+              blurRadius: selected ? 14 : 10,
+              offset: const Offset(0, 6),
+            ),
+          ],
+        ),
+        child: Stack(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                circleAvatar(),
+                const SizedBox(width: 16),
+                Expanded(child: infoPsyc()),
+              ],
+            ),
+            if (selected) Positioned(bottom: 4, right: 4, child: verifyIcon()),
+          ],
+        ),
       ),
     );
   }
