@@ -8,14 +8,14 @@ import 'package:psicApp/app/components/ui/feels_dropdown_ui.dart';
 import 'package:psicApp/app/modules/patient/triage/patrient_triage_controller.dart';
 import 'package:psicApp/app/utils/app_colors.dart';
 
-class PatientTriageView extends GetView<PatientTriageController> {
+class PatientTriageView extends GetView<PatientTriageCompController> {
   const PatientTriageView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ScaffoldUI(
       title: 'Triagem Inicial',
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.neutralMist,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

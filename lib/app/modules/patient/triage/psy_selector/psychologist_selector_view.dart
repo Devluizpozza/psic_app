@@ -47,7 +47,7 @@ class PsychologistSelectorView extends GetView<PsychologistSelectorController> {
         padding: EdgeInsets.symmetric(vertical: 10),
         child: FloatingActionButton(
           backgroundColor: AppColors.lightBlue,
-          onPressed: () => {},
+          onPressed: () => controller.submitPsychologistAfterTriage(),
           child: const Icon(Icons.arrow_forward, color: Colors.black),
         ),
       ),

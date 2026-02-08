@@ -19,4 +19,5 @@ abstract class AppRoutes {
   static const String agenda = '/agenda';
   static const String select_role = '/selectRole';
   static const String psychologist_selector = '/psychologistSelector';
+  static const String timeSlot_selector = '/timeSlotSelector';
 }

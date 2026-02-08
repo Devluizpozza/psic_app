@@ -5,7 +5,7 @@ import 'package:psicApp/app/consts/enums.dart';
 import 'package:psicApp/app/modules/patient/triage/patrient_triage_controller.dart';
 
 class FeelsDropdown extends StatelessWidget {
-  final PatientTriageController controller;
+  final PatientTriageCompController controller;
 
   const FeelsDropdown(this.controller, {super.key});
 
@@ -14,7 +14,7 @@ class FeelsDropdown extends StatelessWidget {
     return InputContainer(
       child: Obx(
         () => DropdownButtonFormField<FeelsType>(
-          value: controller.feels.value,
+          value: controller.feels,
           decoration: const InputDecoration(
             labelText: 'Como você está se sentindo?',
           ),

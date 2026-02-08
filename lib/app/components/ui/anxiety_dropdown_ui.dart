@@ -5,7 +5,7 @@ import 'package:psicApp/app/consts/enums.dart';
 import 'package:psicApp/app/modules/patient/triage/patrient_triage_controller.dart';
 
 class AnxietyDropdown extends StatelessWidget {
-  final PatientTriageController controller;
+  final PatientTriageCompController controller;
 
   const AnxietyDropdown(this.controller, {super.key});
 
@@ -13,8 +13,8 @@ class AnxietyDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return InputContainer(
       child: Obx(
-        () => DropdownButtonFormField<AnsietyType>(
-          value: controller.anxiety.value,
+        () => DropdownButtonFormField<AnxietyType>(
+          value: controller.anxiety,
           decoration: const InputDecoration(labelText: 'Nível de ansiedade'),
           items:
               controller.anxietyOptions

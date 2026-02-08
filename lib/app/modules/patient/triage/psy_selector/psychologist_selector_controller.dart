@@ -1,26 +1,30 @@
 import 'package:get/get.dart';
+import 'package:psicApp/app/comp/triage_controller_comp.dart';
 import 'package:psicApp/app/consts/enums.dart';
 import 'package:psicApp/app/db/collections.dart';
 import 'package:psicApp/app/db/db.dart';
 import 'package:psicApp/app/models/psychologist_model.dart';
 import 'package:psicApp/app/repositories/psychologist_repository.dart';
+import 'package:psicApp/app/routes/app_routes.dart';
 import 'package:psicApp/app/utils/logger.dart';
 
 class PsychologistSelectorController extends GetxController {
   final PsychologistRepository psychologistRepository =
       PsychologistRepository();
+  final triageCompController = Get.put(TriageCompController());
+
   final Rx<List<Psychologist>> _psychologists = Rx<List<Psychologist>>([]);
-  final Rx<Psychologist?> selectedPsychologist = Rx<Psychologist?>(null);
+  final Rx<Psychologist?> _selectedPsychologist = Rx<Psychologist?>(null);
   late FeelsType feels;
   late AnxietyType anxiety;
   late String difficulty;
 
   void selectPsychologist(Psychologist psychologist) {
-    selectedPsychologist.value = psychologist;
+    _selectedPsychologist.value = psychologist;
   }
 
   bool isSelected(Psychologist psychologist) {
-    return selectedPsychologist.value?.uid == psychologist.uid;
+    return _selectedPsychologist.value?.uid == psychologist.uid;
   }
 
   List<Psychologist> get psychologists => _psychologists.value;
@@ -30,15 +34,15 @@ class PsychologistSelectorController extends GetxController {
     _psychologists.refresh();
   }
 
+  Psychologist? get selectedPsychologist => _selectedPsychologist.value;
+
+  set selectedPsychologist(Psychologist? value) {
+    _selectedPsychologist.value = value;
+    _selectedPsychologist.refresh();
+  }
+
   @override
   void onInit() async {
-    final Map<String, dynamic>? arguments = Get.arguments;
-
-    if (arguments != null) {
-      feels = arguments['feels'];
-      anxiety = arguments['anxiety'];
-      difficulty = arguments['difficulty'] ?? '';
-    }
     await listPsychologists();
     super.onInit();
   }
@@ -68,5 +72,10 @@ class PsychologistSelectorController extends GetxController {
     } catch (e) {
       throw Exception("$e");
     }
+  }
+
+  void submitPsychologistAfterTriage() {
+    triageCompController.psychologist = selectedPsychologist;
+    Get.toNamed(AppRoutes.timeSlot_selector);
   }
 }

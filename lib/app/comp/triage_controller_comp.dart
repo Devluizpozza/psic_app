@@ -2,12 +2,14 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:psicApp/app/consts/enums.dart';
 import 'package:psicApp/app/models/psychologist_model.dart';
+import 'package:psicApp/app/models/time_slot_model.dart';
 
-class TriageController extends GetxController {
+class TriageCompController extends GetxController {
   final Rx<FeelsType> _feels = Rx<FeelsType>(FeelsType.none);
   final Rx<AnxietyType> _anxiety = Rx<AnxietyType>(AnxietyType.none);
   final _difficulty = ''.obs;
-    final selectedPsychologist = Rx<Psychologist?>(null);
+  final Rx<Psychologist?> _psychologist = Rx<Psychologist?>(null);
+  final Rx<TimeSlot?> _timeSlot = Rx<TimeSlot?>(null);
   final selectedDateTime = Rx<DateTime?>(null);
 
   FeelsType get feels => _feels.value;
@@ -31,4 +33,25 @@ class TriageController extends GetxController {
     _difficulty.refresh();
   }
 
+  Psychologist? get psychologist => _psychologist.value;
+
+  set psychologist(Psychologist? value) {
+    _psychologist.value = value;
+    _psychologist.refresh();
+  }
+
+  TimeSlot? get timeSlot => _timeSlot.value;
+
+  set timeSlot(TimeSlot? value) {
+    _timeSlot.value = value;
+    _timeSlot.refresh();
+  }
+
+  void reset() {
+    timeSlot = null;
+    psychologist = null;
+    difficulty = '';
+    anxiety = AnxietyType.none;
+    feels = FeelsType.none;
+  }
 }

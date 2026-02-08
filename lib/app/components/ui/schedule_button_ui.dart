@@ -1,36 +1,31 @@
-// import 'package:psicApp/app/modules/patient/triage/patrient_triage_controller.dart';
-// import 'package:psicApp/app/utils/app_colors.dart';
-// import 'package:flutter/material.dart';
-// import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:flutter/material.dart';
+import 'package:psicApp/app/utils/app_colors.dart';
 
-// class ScheduleButton extends StatelessWidget {
-//   final PatientTriageController controller;
-//   final void Function()? onPressed;
+class ScheduleButton extends StatelessWidget {
+  final void Function()? onPressed;
 
-//   const ScheduleButton(this.controller, this.onPressed, {super.key});
+  const ScheduleButton({this.onPressed, super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Obx(
-//       () => SizedBox(
-//         width: double.infinity,
-//         height: 52,
-//         child: ElevatedButton(
-//           style: ElevatedButton.styleFrom(
-//             backgroundColor: AppColors.healingMint,
-//             foregroundColor: Colors.black,
-//             shape: RoundedRectangleBorder(
-//               borderRadius: BorderRadius.circular(16),
-//             ),
-//             elevation: 3,
-//           ),
-//           onPressed:onPressed),
-//           child: const Text(
-//             'Agendar Consulta',
-//             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-//           ),
-//         ),
-//       ),
-//     )
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 52,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.therapyGreen,
+          foregroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          elevation: 3,
+        ),
+        onPressed: onPressed,
+        child: const Text(
+          'Agendar',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        ),
+      ),
+    );
+  }
+}

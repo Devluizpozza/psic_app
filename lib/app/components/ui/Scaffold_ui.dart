@@ -41,6 +41,7 @@ class ScaffoldUI extends StatelessWidget {
             centerTitle: true,
             actions: actions,
             automaticallyImplyLeading: true,
+            backgroundColor: AppColors.lightGrey,
           ),
       body: Stack(
         children: [

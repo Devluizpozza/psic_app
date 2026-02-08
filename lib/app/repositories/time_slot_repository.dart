@@ -23,6 +23,7 @@ class TimeSlotRepository extends DB {
       final query =
           await CollectionsGroupRef.timeSlot
               .where("psychologistId", isEqualTo: psychologistId)
+              .orderBy("startAt")
               .get();
       return query.docs.map((doc) => doc.data()).toList();
     } catch (e) {

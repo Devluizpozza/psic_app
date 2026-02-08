@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/app_colors.dart';
-
 class InputContainer extends StatelessWidget {
   final Widget child;
 
@@ -12,7 +10,7 @@ class InputContainer extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       decoration: BoxDecoration(
-        color: AppColors.mentalEase.withOpacity(0.22),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(18),
       ),
       child: Theme(

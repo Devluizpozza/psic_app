@@ -9,6 +9,8 @@ import 'package:psicApp/app/modules/login/register_user_bindings.dart';
 import 'package:psicApp/app/modules/login/register_user_view.dart';
 import 'package:psicApp/app/modules/login/select_role_bindings.dart';
 import 'package:psicApp/app/modules/login/select_role_view.dart';
+import 'package:psicApp/app/modules/patient/triage/time_slot_selector/time_slot_selector_bindings.dart';
+import 'package:psicApp/app/modules/patient/triage/time_slot_selector/time_slot_selector_view.dart';
 import 'package:psicApp/app/modules/patient/triage/patient_triage_bindings.dart';
 import 'package:psicApp/app/modules/patient/triage/patient_triage_view.dart';
 import 'package:psicApp/app/modules/patient/triage/psy_selector/psychologist_selector_bindings.dart';
@@ -56,6 +58,11 @@ abstract class AppPages {
       name: AppRoutes.psychologist_selector,
       page: () => PsychologistSelectorView(),
       binding: PsychologistSelectorBindings(),
+    ),
+    GetPage(
+      name: AppRoutes.timeSlot_selector,
+      page: () => TimeSlotSelectorView(),
+      binding: TimeSlotSelectorBindings(),
     ),
     GetPage(
       name: AppRoutes.agenda,
