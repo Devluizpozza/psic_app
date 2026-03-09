@@ -39,30 +39,24 @@ class RegisterUserController extends GetxController {
   void onInit() {
     final Map<String, dynamic>? arguments = Get.arguments;
     if (arguments != null) {
-      userUID = arguments['userUID'];
-      phoneNumber = arguments['phoneNumber'] ?? '';
-      email = arguments['email'] ?? '';
-      userRoleType = arguments['userRoleType'] ?? UserRoleType.none;
-      contatoController.text = phoneNumber;
-      emailController.text = email;
+      userUID = arguments['userUid'];
     }
     super.onInit();
   }
 
   Future<void> createUser() async {
     try {
-      AppUser userToSave = AppUser(
-        uid: userUID,
-        name: nameController.text,
-        contato:
+      AppUser remoteUser = await appUserRepository.fetch(userUID);
+      AppUser userToSave = remoteUser.copyWith({
+        "name": nameController.text,
+        "email": emailController.text,
+        "contact":
             contatoController.text.startsWith('+55')
                 ? contatoController.text
                 : "+55${contatoController.text}",
-        email: emailController.text,
-        userType: userRoleType,
-        createAt: DateTime.now(),
-      );
-      bool success = await appUserRepository.create(userToSave);
+      });
+
+      bool success = await appUserRepository.update(userToSave);
       if (success) {
         UserController.instance.fetch(userToSave.uid);
         SnackBarHandler.snackBarSuccess('Usuário criado com sucesso!');

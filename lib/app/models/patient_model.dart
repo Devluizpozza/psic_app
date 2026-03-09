@@ -4,28 +4,28 @@ import 'package:equatable/equatable.dart';
 class Patient extends Equatable {
   final String uid;
   final String name;
-  final String contato;
+  final String contact;
   final String email;
   final String imageUrl;
-  final DateTime createAt;
+  final DateTime createdAt;
 
   const Patient({
     required this.uid,
     required this.name,
-    required this.contato,
+    required this.contact,
     required this.email,
     this.imageUrl = '',
-    required this.createAt,
+    required this.createdAt,
   });
 
   factory Patient.fromJson(Map<String, dynamic> map) {
     return Patient(
       uid: map['uid'] ?? '',
       name: map['name'] ?? '',
-      contato: map['contato'] ?? '',
+      contact: map['contact'] ?? '',
       email: map['email'] ?? '',
       imageUrl: map['imageUrl'] ?? '',
-      createAt: (map['createAt'] as Timestamp).toDate(),
+      createdAt: (map['createdAt'] as Timestamp).toDate(),
     );
   }
 
@@ -33,10 +33,10 @@ class Patient extends Equatable {
     return {
       'uid': uid,
       'name': name,
-      'contato': contato,
+      'contact': contact,
       'email': email,
       'imageUrl': imageUrl,
-      'createAt': createAt,
+      'createdAt': createdAt,
     };
   }
 
@@ -44,9 +44,9 @@ class Patient extends Equatable {
     return Patient(
       uid: '',
       name: '',
-      contato: '',
+      contact: '',
       email: '',
-      createAt: DateTime.now(),
+      createdAt: DateTime.now(),
     );
   }
 
@@ -54,13 +54,13 @@ class Patient extends Equatable {
     return Patient(
       uid: map['uid'] ?? '',
       name: map['name'] ?? '',
-      contato: map['contato'] ?? '',
+      contact: map['contact'] ?? '',
       email: map['email'] ?? '',
       imageUrl: map['imageUrl'] ?? '',
-      createAt:
-          (map['createAt'] is Timestamp)
-              ? (map['createAt'] as Timestamp).toDate()
-              : DateTime.tryParse(map['createAt']?.toString() ?? '') ??
+      createdAt:
+          (map['createdAt'] is Timestamp)
+              ? (map['createdAt'] as Timestamp).toDate()
+              : DateTime.tryParse(map['createdAt']?.toString() ?? '') ??
                   DateTime.now(),
     );
   }
@@ -72,5 +72,5 @@ class Patient extends Equatable {
   }
 
   @override
-  List<Object?> get props => [uid, name, contato, email, imageUrl, createAt];
+  List<Object?> get props => [uid, name, contact, email, imageUrl, createdAt];
 }

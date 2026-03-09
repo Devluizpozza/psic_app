@@ -3,6 +3,7 @@ import 'package:psicApp/app/db/collections.dart';
 import 'package:psicApp/app/db/db.dart';
 import 'package:psicApp/app/models/app_user_model.dart';
 import 'package:psicApp/app/models/log_model.dart';
+import 'package:psicApp/app/models/patient_model.dart';
 import 'package:psicApp/app/models/psychologist_model.dart';
 import 'package:psicApp/app/models/schedule_model.dart';
 import 'package:psicApp/app/models/time_slot_model.dart';
@@ -66,6 +67,17 @@ abstract class CollectionsRef {
         },
         toFirestore: (Schedule timeSlot, _) {
           return timeSlot.toJson();
+        },
+      );
+
+        static CollectionReference<Patient> get patient => DB.firestoreInstance
+      .collection(Collections.patient)
+      .withConverter<Patient>(
+        fromFirestore: (snapshot, _) {
+          return Patient.fromJson(snapshot.data()!);
+        },
+        toFirestore: (Patient patient, _) {
+          return patient.toJson();
         },
       );
 }

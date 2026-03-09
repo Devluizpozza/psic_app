@@ -9,7 +9,7 @@ class Psychologist extends Equatable {
   final String email;
   final String imageUrl;
   final SpecialtyType specialty;
-  final DateTime createAt;
+  final DateTime createdAt;
 
   const Psychologist({
     required this.uid,
@@ -17,7 +17,7 @@ class Psychologist extends Equatable {
     required this.contact,
     required this.email,
     this.imageUrl = '',
-    required this.createAt,
+    required this.createdAt,
     this.specialty = SpecialtyType.none,
   });
 
@@ -32,7 +32,7 @@ class Psychologist extends Equatable {
         (e) => e.name == map['specialty'],
         orElse: () => SpecialtyType.none,
       ),
-      createAt: (map['createAt'] as Timestamp).toDate(),
+      createdAt: (map['createdAt'] as Timestamp).toDate(),
     );
   }
 
@@ -44,7 +44,7 @@ class Psychologist extends Equatable {
       'email': email,
       'imageUrl': imageUrl,
       'specialty': specialty.name,
-      'createAt': createAt,
+      'createdAt': createdAt,
     };
   }
 
@@ -55,7 +55,7 @@ class Psychologist extends Equatable {
       contact: '',
       email: '',
       specialty: SpecialtyType.none,
-      createAt: DateTime.now(),
+      createdAt: DateTime.now(),
     );
   }
 
@@ -67,10 +67,10 @@ class Psychologist extends Equatable {
       email: map['email'] ?? '',
       imageUrl: map['imageUrl'] ?? '',
       specialty: map['specialty'] ?? SpecialtyType.none,
-      createAt:
-          (map['createAt'] is Timestamp)
-              ? (map['createAt'] as Timestamp).toDate()
-              : DateTime.tryParse(map['createAt']?.toString() ?? '') ??
+      createdAt:
+          (map['createdAt'] is Timestamp)
+              ? (map['createdAt'] as Timestamp).toDate()
+              : DateTime.tryParse(map['createdAt']?.toString() ?? '') ??
                   DateTime.now(),
     );
   }
@@ -89,6 +89,6 @@ class Psychologist extends Equatable {
     email,
     imageUrl,
     specialty,
-    createAt,
+    createdAt,
   ];
 }

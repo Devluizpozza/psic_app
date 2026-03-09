@@ -7,4 +7,5 @@ abstract class Collections {
   static const String psychologist = 'psychologist';
   static const String time_slot = 'timeSlot';
   static const String schedule = 'schedule';
+  static const String patient = 'patient';
 }

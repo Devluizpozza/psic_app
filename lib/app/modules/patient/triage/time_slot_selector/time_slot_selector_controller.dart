@@ -62,24 +62,6 @@ class TimeSlotSelectorController extends GetxController {
     }
   }
 
-  // Future<void> createPsychologist() async {
-  //   try {
-  //     Psychologist psy = Psychologist(
-  //       name: "Joao Paulo figueiredo",
-  //       contact: "4899999999",
-  //       createAt: DateTime.now(),
-  //       email: "teste@gmail.com",
-  //       uid: DB.generateUID(Collections.psychologist),
-  //       specialty: SpecialtyType.clinico,
-  //     );
-
-  //     PsychologistRepository psychologistRepository = PsychologistRepository();
-  //     bool success = await psychologistRepository.create(psy);
-  //     print("$success");
-  //   } catch (e) {
-  //     throw Exception("$e");
-  //   }
-  // }
 
   void submitPsychologistAfterTriage() async {
     try {

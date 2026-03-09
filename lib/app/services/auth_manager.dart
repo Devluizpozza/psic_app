@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:psicApp/app/consts/enums.dart';
 import 'package:psicApp/app/handlers/snack_bar_handler.dart';
 import 'package:psicApp/app/models/app_user_model.dart';
 import 'package:psicApp/app/modules/user/user_controller.dart';
@@ -35,9 +36,10 @@ class AuthManager extends GetxController {
   User? get currentUser => FirebaseAuth.instance.currentUser;
 
   @override
-  void onInit() {
+  void onInit() async {
     firebaseUser.bindStream(_auth.authStateChanges());
     ever(firebaseUser, handleAuthChanged);
+
     super.onInit();
   }
 
@@ -79,8 +81,7 @@ class AuthManager extends GetxController {
               );
             } else {
               UserController.instance.user = remoteUser;
-              Get.offAllNamed(AppRoutes.initial);
-
+              Get.offAllNamed(AppRoutes.home);
               SnackBarHandler.snackBarSuccessLogin(remoteUser.name);
             }
           }
@@ -250,17 +251,52 @@ class AuthManager extends GetxController {
       if (user != null && user.uid.isNotEmpty) {
         AppUser remoteUser = await appUserRepository.fetch(user.uid);
 
-        if (remoteUser.name.isEmpty) {
-          Get.back();
-          Get.toNamed(
-            AppRoutes.select_role,
-            arguments: {'userUID': user.uid, 'phoneNumber': phoneNumber},
+        if (remoteUser.onboardingStepType.name ==
+            OnboardingStepType.none.name) {
+          AppUser appUserToSave = AppUser(
+            uid: user.uid,
+            name: '',
+            contato: '',
+            createAt: DateTime.now(),
+            email: '',
+            userType: remoteUser.userType,
+            imageUrl: '',
+            onboardingStepType: OnboardingStepType.phone_verified,
           );
+          bool success = await appUserRepository.create(appUserToSave);
+          if (success) {
+            Get.back();
+            Get.toNamed(
+              AppRoutes.select_role,
+              arguments: {'userUid': user.uid, 'phoneNumber': phoneNumber},
+            );
+          }
         } else {
-          UserController.instance.user = remoteUser;
-          Get.toNamed(AppRoutes.initial, arguments: user.uid);
-          SnackBarHandler.snackBarSuccessLogin(remoteUser.name);
+          switch (remoteUser.onboardingType) {
+            case 'phone_verified':
+              Get.offAllNamed(
+                AppRoutes.select_role,
+                arguments: {"userUid": remoteUser.uid},
+              );
+              break;
+
+            case 'role_selected':
+              Get.offAllNamed(
+                AppRoutes.register_user,
+                arguments: {"userUid": remoteUser.uid},
+              );
+              break;
+
+            case 'finished':
+              Get.offAllNamed(
+                AppRoutes.home,
+                arguments: {"userUid": remoteUser.uid},
+              );
+          }
         }
+        UserController.instance.user = remoteUser;
+        Get.toNamed(AppRoutes.initial, arguments: user.uid);
+        SnackBarHandler.snackBarSuccessLogin(remoteUser.name);
       }
       isManualLogin = false;
     } catch (e) {

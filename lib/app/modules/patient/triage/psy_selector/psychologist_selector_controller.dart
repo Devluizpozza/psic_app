@@ -60,7 +60,7 @@ class PsychologistSelectorController extends GetxController {
       Psychologist psy = Psychologist(
         name: "Joao Paulo figueiredo",
         contact: "4899999999",
-        createAt: DateTime.now(),
+        createdAt: DateTime.now(),
         email: "teste@gmail.com",
         uid: DB.generateUID(Collections.psychologist),
         specialty: SpecialtyType.clinico,

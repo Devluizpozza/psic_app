@@ -24,3 +24,11 @@ enum UserRoleType { none, psychologist, patient }
 enum ScheduleStatusType { none, scheduled, requested, cancelled }
 
 enum ScheduleType { none, single, recurring }
+
+enum OnboardingStepType {
+  none,
+  phone_verified,
+  role_selected,
+  basic_info_completed,
+  finished,
+}

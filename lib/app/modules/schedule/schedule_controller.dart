@@ -78,7 +78,7 @@ class ScheduleController extends GetxController
       Psychologist psy = Psychologist(
         name: "teste 3",
         contact: "3",
-        createAt: DateTime.now(),
+        createdAt: DateTime.now(),
         email: "teste@gmail.com",
         uid: DB.generateUID(Collections.psychologist),
         specialty: SpecialtyType.clinico,

@@ -47,6 +47,16 @@ class AppUserRepository extends DB {
     }
   }
 
+  Future<bool> update(AppUser appUser) async {
+    try {
+      await CollectionsRef.appUser.doc(appUser.uid).set(appUser);
+      return true;
+    } catch (e) {
+      Logger.info(e);
+      return false;
+    }
+  }
+
   Future<bool> updateOnly(String uid, Map<String, dynamic> changes) async {
     try {
       await CollectionsRef.appUser.doc(uid).update(changes);
