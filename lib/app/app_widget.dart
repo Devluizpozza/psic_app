@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:psicApp/app/routes/app_pages.dart';
-import 'package:psicApp/app/routes/app_routes.dart';
-import 'package:psicApp/app/services/auth_manager.dart';
+import 'package:psicApp/app/presentation/routes/app_pages.dart';
+import 'package:psicApp/app/presentation/routes/app_routes.dart';
+import 'package:psicApp/app/presentation/shared/controllers/auth_manager.dart';
 
 class AppWidget extends StatelessWidget {
   final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
