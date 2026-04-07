@@ -99,7 +99,7 @@ Make sure you have the following installed:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/psic_app.git
+git clone https://github.com/Devluizpozza/psic_app
 cd psic_app
 ```
 
