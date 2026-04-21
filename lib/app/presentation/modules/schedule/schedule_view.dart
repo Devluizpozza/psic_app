@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:psicApp/app/presentation/shared/components/scaffold_ui.dart';
+import 'package:psicApp/app/core/theme/app_colors.dart';
 import 'package:psicApp/app/presentation/modules/home/sections/good_news_section.dart';
 import 'package:psicApp/app/presentation/modules/home/sections/motivation_section.dart';
 import 'package:psicApp/app/presentation/modules/schedule/schedule_controller.dart';
 import 'package:psicApp/app/presentation/routes/app_routes.dart';
+import 'package:psicApp/app/presentation/shared/components/scaffold_ui.dart';
 import 'package:psicApp/app/presentation/shared/controllers/auth_manager.dart';
-import 'package:psicApp/app/core/theme/app_colors.dart';
 
 class ScheduleView extends GetView<ScheduleController> {
   const ScheduleView({super.key});
@@ -41,7 +41,7 @@ class ScheduleView extends GetView<ScheduleController> {
             ListTile(
               leading: Icon(Icons.read_more_outlined),
               title: Text('Agendamentos'),
-              onTap: () => Get.toNamed(AppRoutes.parking_owner_list),
+              onTap: () => Get.toNamed(AppRoutes.home),
             ),
             ListTile(
               leading: Icon(Icons.settings),
