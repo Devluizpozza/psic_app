@@ -22,9 +22,9 @@ class UserController extends GetxController {
       AppUserRepository appUserRepository = AppUserRepository();
       AppUser? remoteUser = await appUserRepository.fetch(uid);
 
-      if (remoteUser.name.isEmpty) {
-        Logger.info("Usuário não encontrado ou sem dados. Forçando logout.");
-        await AuthManager.instance.signOut();
+      // Só desloga se o documento realmente não existe no Firestore
+      if (remoteUser.uid.isEmpty) {
+        Logger.info("Usuário não encontrado no Firestore.");
         return null;
       }
 

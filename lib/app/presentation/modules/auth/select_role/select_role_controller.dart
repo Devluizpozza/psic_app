@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:psicApp/app/core/constants/app_enums.dart';
 import 'package:psicApp/app/domain/models/app_user.dart';
+import 'package:psicApp/app/domain/models/patient.dart';
+import 'package:psicApp/app/domain/models/psychologist.dart';
 import 'package:psicApp/app/data/repositories/app_user_repository.dart';
 import 'package:psicApp/app/data/repositories/patient_repository.dart';
 import 'package:psicApp/app/data/repositories/psychologist_repository.dart';
@@ -74,39 +76,32 @@ class SelectRoleController extends GetxController {
             "onboardingStepType": OnboardingStepType.role_selected.name,
           });
           await appUserRepository.update(userAfterCopyWith);
-          // if (success) {
-          //   SnackBarHandler.snackBarSuccess(
-          //     "A role do usuário ${remoteUser.name} foi adicionada.",
-          //   );
 
-          //   if (userAfterCopyWith.userType == UserRoleType.patient) {
-          //     Patient patientToSave = Patient(
-          //       uid: remoteUser.uid,
-          //       name: '',
-          //       contact: phoneNumber,
-          //       email: email,
-          //       createdAt: DateTime.now(),
-          //       imageUrl: '',
-          //     );
-          //     await patientRepository.create(patientToSave);
-          //   }
-          // }
-
-          // if (userAfterCopyWith.userType == UserRoleType.psychologist) {
-          //   Psychologist psychologistToSave = Psychologist(
-          //     uid: remoteUser.uid,
-          //     name: '',
-          //     contact: phoneNumber,
-          //     email: email,
-          //     createdAt: DateTime.now(),
-          //     imageUrl: '',
-          //   );
-          //   await psychologistRepository.create(psychologistToSave);
-          // }
+          if (userAfterCopyWith.userType == UserRoleType.patient) {
+            await patientRepository.create(
+              Patient(
+                uid: remoteUser.uid,
+                name: '',
+                contact: phoneNumber,
+                email: email,
+                createdAt: DateTime.now(),
+              ),
+            );
+          } else if (userAfterCopyWith.userType == UserRoleType.psychologist) {
+            await psychologistRepository.create(
+              Psychologist(
+                uid: remoteUser.uid,
+                name: '',
+                contact: phoneNumber,
+                email: email,
+                createdAt: DateTime.now(),
+              ),
+            );
+          }
 
           Get.toNamed(
             AppRoutes.register_user,
-            arguments: {"userUid": remoteUser.uid},
+            arguments: {'userUid': remoteUser.uid},
           );
         }
       }

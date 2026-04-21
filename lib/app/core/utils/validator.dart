@@ -5,7 +5,7 @@ abstract class Validator {
     if (value == null || value.trim().isEmpty) {
       return 'Nome obrigatório';
     }
-    if (!RegExp(r'^[A-Za-z\s]+$').hasMatch(value)) {
+    if (!RegExp(r'^[A-Za-zÀ-ÿ\s]+$').hasMatch(value.trim())) {
       return 'Use apenas letras e espaços';
     }
     return null;

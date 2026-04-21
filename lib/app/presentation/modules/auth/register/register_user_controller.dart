@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:psicApp/app/core/constants/app_enums.dart';
+import 'package:psicApp/app/core/utils/validator.dart';
 import 'package:psicApp/app/presentation/shared/handlers/snack_bar_handler.dart';
 import 'package:psicApp/app/domain/models/app_user.dart';
 import 'package:psicApp/app/presentation/shared/controllers/user_controller.dart';
@@ -10,6 +11,7 @@ import 'package:psicApp/app/core/logger/logger.dart';
 
 class RegisterUserController extends GetxController {
   final AppUserRepository appUserRepository = AppUserRepository();
+  final formKey = GlobalKey<FormState>();
   late String userUID;
   late String phoneNumber;
   late String email;
@@ -17,6 +19,10 @@ class RegisterUserController extends GetxController {
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final contatoController = TextEditingController();
+
+  String? validateName(String? v) => Validator.displayNameValidator(v);
+  String? validateEmail(String? v) => Validator.emailValidator(v);
+  String? validatePhone(String? v) => Validator.phoneValidator(v);
 
   final RxBool _isEditing = false.obs;
   final RxBool _isLoading = false.obs;
@@ -45,15 +51,17 @@ class RegisterUserController extends GetxController {
   }
 
   Future<void> createUser() async {
+    if (!(formKey.currentState?.validate() ?? false)) return;
     try {
       AppUser remoteUser = await appUserRepository.fetch(userUID);
       AppUser userToSave = remoteUser.copyWith({
         "name": nameController.text,
         "email": emailController.text,
-        "contact":
+        "contato":
             contatoController.text.startsWith('+55')
                 ? contatoController.text
                 : "+55${contatoController.text}",
+        "onboardingStepType": OnboardingStepType.finished.name,
       });
 
       bool success = await appUserRepository.update(userToSave);
@@ -67,12 +75,11 @@ class RegisterUserController extends GetxController {
     }
   }
 
-  // @override
-  // void onClose() {
-  //   super.onClose();
-  //   nameController.dispose();
-  //   placaController.dispose();
-  //   contatoController.dispose();
-  //   emailController.dispose();
-  // }
+  @override
+  void onClose() {
+    nameController.dispose();
+    emailController.dispose();
+    contatoController.dispose();
+    super.onClose();
+  }
 }

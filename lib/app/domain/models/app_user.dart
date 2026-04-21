@@ -84,7 +84,7 @@ class AppUser extends Equatable {
       email: map['email'] ?? '',
       imageUrl: map['imageUrl'] ?? '',
       userType: _parseUserType(map['userType']),
-      onboardingStepType: _parseOnboardingType(map['userType']),
+      onboardingStepType: _parseOnboardingType(map['onboardingStepType']),
       createAt: _parseDate(map['createAt']),
     );
   }
@@ -122,7 +122,7 @@ class AppUser extends Equatable {
       email: map['email'] ?? '',
       imageUrl: map['imageUrl'] ?? '',
       userType: _parseUserType(map['userType']),
-      onboardingStepType: _parseOnboardingType(map['userType']),
+      onboardingStepType: _parseOnboardingType(map['onboardingStepType']),
       createAt:
           (map['createAt'] is Timestamp)
               ? (map['createAt'] as Timestamp).toDate()

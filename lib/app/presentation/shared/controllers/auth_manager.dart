@@ -77,7 +77,7 @@ class AuthManager extends GetxController {
             if (remoteUser.name.isEmpty) {
               Get.toNamed(
                 AppRoutes.select_role,
-                arguments: {userUID: user.uid, phoneNumber: phoneNumber},
+                arguments: {'userUid': user.uid, 'phoneNumber': phoneNumber},
               );
             } else {
               UserController.instance.user = remoteUser;
@@ -136,14 +136,14 @@ class AuthManager extends GetxController {
             Get.toNamed(
               AppRoutes.select_role,
               arguments: {
-                'userUID': user.uid,
+                'userUid': user.uid,
                 'email': email,
-                "phoneNumber": '',
+                'phoneNumber': '',
               },
             );
           } else {
             UserController.instance.user = remoteUser;
-            Get.toNamed(AppRoutes.initial, arguments: user.uid);
+            Get.offAllNamed(AppRoutes.home);
             SnackBarHandler.snackBarSuccessLogin(remoteUser.name);
           }
         }
@@ -153,18 +153,6 @@ class AuthManager extends GetxController {
     } catch (e) {
       isManualLogin = false;
       Logger.info(e.toString());
-    }
-  }
-
-  Future<void> verifyCode(String verificationId, String smsCode) async {
-    try {
-      PhoneAuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: verificationId,
-        smsCode: smsCode,
-      );
-      await FirebaseAuth.instance.signInWithCredential(credential);
-    } catch (e) {
-      SnackBarHandler.snackBarError('Erro, Falha ao verificar código');
     }
   }
 
@@ -272,31 +260,35 @@ class AuthManager extends GetxController {
             );
           }
         } else {
+          UserController.instance.user = remoteUser;
           switch (remoteUser.onboardingType) {
             case 'phone_verified':
               Get.offAllNamed(
                 AppRoutes.select_role,
-                arguments: {"userUid": remoteUser.uid},
+                arguments: {'userUid': remoteUser.uid},
               );
               break;
 
             case 'role_selected':
               Get.offAllNamed(
                 AppRoutes.register_user,
-                arguments: {"userUid": remoteUser.uid},
+                arguments: {'userUid': remoteUser.uid},
               );
               break;
 
             case 'finished':
+              UserController.instance.user = remoteUser;
+              Get.offAllNamed(AppRoutes.home);
+              SnackBarHandler.snackBarSuccessLogin(remoteUser.name);
+              break;
+
+            default:
               Get.offAllNamed(
-                AppRoutes.home,
-                arguments: {"userUid": remoteUser.uid},
+                AppRoutes.select_role,
+                arguments: {'userUid': remoteUser.uid},
               );
           }
         }
-        UserController.instance.user = remoteUser;
-        Get.toNamed(AppRoutes.initial, arguments: user.uid);
-        SnackBarHandler.snackBarSuccessLogin(remoteUser.name);
       }
       isManualLogin = false;
     } catch (e) {

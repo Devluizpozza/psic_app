@@ -24,9 +24,12 @@ class AppUserRepository extends DB {
     }
   }
 
+  // Cria documento novo — falha se já existir
   Future<bool> create(AppUser appUser) async {
     try {
-      await CollectionsRef.appUser.doc(appUser.uid).set(appUser);
+      await CollectionsRef.appUser
+          .doc(appUser.uid)
+          .set(appUser, SetOptions(merge: false));
       return true;
     } catch (e) {
       Logger.info(e);
@@ -34,9 +37,12 @@ class AppUserRepository extends DB {
     }
   }
 
+  // Atualiza documento existente via merge — preserva campos não enviados
   Future<bool> update(AppUser appUser) async {
     try {
-      await CollectionsRef.appUser.doc(appUser.uid).set(appUser);
+      await CollectionsRef.appUser
+          .doc(appUser.uid)
+          .set(appUser, SetOptions(merge: true));
       return true;
     } catch (e) {
       Logger.info(e);

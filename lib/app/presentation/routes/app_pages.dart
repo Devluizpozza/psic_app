@@ -19,7 +19,6 @@ import 'package:psicApp/app/presentation/modules/user_profile/user_profile_bindi
 import 'package:psicApp/app/presentation/modules/user_profile/user_profile_view.dart';
 import 'package:psicApp/app/presentation/routes/app_routes.dart';
 import 'package:psicApp/app/presentation/modules/auth/gate/auth_gate.dart';
-import 'package:psicApp/app/presentation/modules/auth/gate/auth_state_widget.dart';
 
 abstract class AppPages {
   static final List<GetPage> pages = [
@@ -69,6 +68,5 @@ abstract class AppPages {
       page: () => AgendaView(),
       binding: AgendaBindings(),
     ),
-    GetPage(name: AppRoutes.home, page: () => AuthStateWidget()),
   ];
 }

@@ -23,7 +23,7 @@ class TriageCompController extends GetxController {
 
   set anxiety(AnxietyType value) {
     _anxiety.value = value;
-    _feels.refresh();
+    _anxiety.refresh();
   }
 
   String get difficulty => _difficulty.value;
