@@ -6,11 +6,15 @@ import 'package:psicApp/app/presentation/shared/handlers/snack_bar_handler.dart'
 import 'package:psicApp/app/domain/models/app_user.dart';
 import 'package:psicApp/app/presentation/shared/controllers/user_controller.dart';
 import 'package:psicApp/app/data/repositories/app_user_repository.dart';
+import 'package:psicApp/app/data/repositories/patient_repository.dart';
+import 'package:psicApp/app/data/repositories/psychologist_repository.dart';
 import 'package:psicApp/app/presentation/routes/app_routes.dart';
 import 'package:psicApp/app/core/logger/logger.dart';
 
 class RegisterUserController extends GetxController {
   final AppUserRepository appUserRepository = AppUserRepository();
+  final PatientRepository patientRepository = PatientRepository();
+  final PsychologistRepository psychologistRepository = PsychologistRepository();
   final formKey = GlobalKey<FormState>();
   late String userUID;
   late String phoneNumber;
@@ -66,6 +70,18 @@ class RegisterUserController extends GetxController {
 
       bool success = await appUserRepository.update(userToSave);
       if (success) {
+        final profileData = {
+          'name': userToSave.name,
+          'email': userToSave.email,
+          'contact': userToSave.contato,
+        };
+
+        if (userToSave.userType == UserRoleType.patient) {
+          await patientRepository.updateOnly(userToSave.uid, profileData);
+        } else if (userToSave.userType == UserRoleType.psychologist) {
+          await psychologistRepository.updateOnly(userToSave.uid, profileData);
+        }
+
         UserController.instance.fetch(userToSave.uid);
         SnackBarHandler.snackBarSuccess('Usuário criado com sucesso!');
         Get.toNamed(AppRoutes.home);
