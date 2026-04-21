@@ -59,4 +59,14 @@ class TimeSlotRepository extends DB {
       return false;
     }
   }
+
+  Future<bool> delete(String psychologistId, String timeSlotId) async {
+    try {
+      await CollectionsRef.timeSlot(psychologistId).doc(timeSlotId).delete();
+      return true;
+    } catch (e) {
+      Logger.info(e.toString());
+      return false;
+    }
+  }
 }
