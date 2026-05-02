@@ -29,14 +29,46 @@ class ScheduleOwnerListView extends GetView<ScheduleOwnerListController> {
           );
         }
         return ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 20,
+          ),
           children: [
             _DateSelector(controller: controller),
             const SizedBox(height: 24),
             _HourGrid(controller: controller),
             const SizedBox(height: 24),
             _TimeSlotList(controller: controller),
+            // Espaço para o FAB não sobrepor o último item
+            const SizedBox(height: 80),
           ],
+        );
+      }),
+      floatingActionButton: Obx(() {
+        final hasPending = controller.hasPendingChanges;
+        final isSaving = controller.isSaving.value;
+
+        if (!hasPending && !isSaving) return const SizedBox.shrink();
+
+        return FloatingActionButton.extended(
+          onPressed: isSaving ? null : controller.saveChanges,
+          backgroundColor: AppColors.therapyGreen,
+          foregroundColor: Colors.white,
+          elevation: 4,
+          icon: isSaving
+              ? const SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                    strokeWidth: 2,
+                  ),
+                )
+              : const Icon(Icons.check_rounded),
+          label: Text(
+            isSaving ? 'Salvando...' : 'Salvar horários',
+            style: const TextStyle(fontWeight: FontWeight.w600),
+          ),
         );
       }),
     );

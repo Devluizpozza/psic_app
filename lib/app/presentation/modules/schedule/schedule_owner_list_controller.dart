@@ -8,11 +8,21 @@ import 'package:psicApp/app/presentation/shared/handlers/snack_bar_handler.dart'
 import 'package:uuid/uuid.dart';
 
 class ScheduleOwnerListController extends GetxController {
-  final TimeSlotRepository _repo = TimeSlotRepository();
+  final TimeSlotRepository _repo;
 
+  ScheduleOwnerListController({TimeSlotRepository? repo})
+      : _repo = repo ?? TimeSlotRepository();
+
+  // Lista principal exibida na tela (DB + adições pendentes - remoções pendentes)
   final RxList<TimeSlot> timeSlots = <TimeSlot>[].obs;
+
+  // Pendências locais — só vão ao Firestore quando salvar
+  final _pendingAdds = <TimeSlot>[];
+  final _pendingDeletes = <String>[];
+
   final Rx<DateTime> selectedDate = DateTime.now().obs;
   final RxBool isLoading = false.obs;
+  final RxBool isSaving = false.obs;
 
   static const int _firstHour = 8;
   static const int _lastHour = 18;
@@ -21,6 +31,9 @@ class ScheduleOwnerListController extends GetxController {
       List.generate(_lastHour - _firstHour, (i) => i + _firstHour);
 
   String get psychologistId => UserController.instance.user!.uid;
+
+  bool get hasPendingChanges =>
+      _pendingAdds.isNotEmpty || _pendingDeletes.isNotEmpty;
 
   @override
   void onInit() {
@@ -32,6 +45,8 @@ class ScheduleOwnerListController extends GetxController {
     isLoading.value = true;
     try {
       timeSlots.value = await _repo.listByPsychologistId(psychologistId);
+      _pendingAdds.clear();
+      _pendingDeletes.clear();
     } catch (e) {
       Logger.info(e.toString());
     } finally {
@@ -51,7 +66,8 @@ class ScheduleOwnerListController extends GetxController {
     }
   }
 
-  Future<void> addTimeSlot(int hour) async {
+  // Adiciona apenas localmente — sem chamar o banco
+  void addTimeSlot(int hour) {
     final start = DateTime(
       selectedDate.value.year,
       selectedDate.value.month,
@@ -82,16 +98,14 @@ class ScheduleOwnerListController extends GetxController {
       patientId: null,
     );
 
-    final success = await _repo.create(psychologistId, slot);
-    if (success) {
-      timeSlots.add(slot);
-      timeSlots.sort((a, b) => a.startAt.compareTo(b.startAt));
-    } else {
-      SnackBarHandler.snackBarError('Erro ao criar horário.');
-    }
+    _pendingAdds.add(slot);
+    timeSlots.add(slot);
+    timeSlots.sort((a, b) => a.startAt.compareTo(b.startAt));
+    timeSlots.refresh();
   }
 
-  Future<void> removeTimeSlot(TimeSlot slot) async {
+  // Remove apenas localmente — sem chamar o banco
+  void removeTimeSlot(TimeSlot slot) {
     if (!slot.isAvailable) {
       SnackBarHandler.snackBarError(
         'Não é possível remover um horário já agendado.',
@@ -99,11 +113,46 @@ class ScheduleOwnerListController extends GetxController {
       return;
     }
 
-    final success = await _repo.delete(psychologistId, slot.uid);
-    if (success) {
-      timeSlots.remove(slot);
-    } else {
-      SnackBarHandler.snackBarError('Erro ao remover horário.');
+    // Se estava só na fila de adição, basta remover dali
+    final wasOnlyPending = _pendingAdds.remove(slot);
+
+    // Se já existia no banco, precisa deletar lá também
+    if (!wasOnlyPending) {
+      _pendingDeletes.add(slot.uid);
+    }
+
+    timeSlots.remove(slot);
+    timeSlots.refresh();
+  }
+
+  // Persiste todas as alterações pendentes no Firestore de uma vez
+  Future<void> saveChanges() async {
+    if (!hasPendingChanges) return;
+
+    isSaving.value = true;
+    try {
+      final createResults = await Future.wait(
+        _pendingAdds.map((slot) => _repo.create(psychologistId, slot)),
+      );
+      final deleteResults = await Future.wait(
+        _pendingDeletes.map((uid) => _repo.delete(psychologistId, uid)),
+      );
+
+      final allSucceeded =
+          createResults.every((r) => r) && deleteResults.every((r) => r);
+
+      if (allSucceeded) {
+        _pendingAdds.clear();
+        _pendingDeletes.clear();
+        SnackBarHandler.snackBarSuccess('Horários salvos com sucesso!');
+      } else {
+        SnackBarHandler.snackBarError('Alguns horários não puderam ser salvos.');
+      }
+    } catch (e) {
+      Logger.info(e.toString());
+      SnackBarHandler.snackBarError('Erro ao salvar horários.');
+    } finally {
+      isSaving.value = false;
     }
   }
 

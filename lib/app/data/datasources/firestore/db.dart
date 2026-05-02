@@ -4,8 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:psicApp/app/data/services/network_connectivity.dart';
 
 class DB {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
-  static FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
+  FirebaseFirestore get firestore => FirebaseFirestore.instance;
+  static FirebaseFirestore get firestoreInstance => FirebaseFirestore.instance;
 
   static String generateId({
     String prefix = '',
