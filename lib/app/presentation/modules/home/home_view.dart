@@ -40,6 +40,11 @@ class HomeView extends GetView<HomeController> {
             ),
             ListTile(
               leading: Icon(Icons.read_more_outlined),
+              title: Text('Meus horários'),
+              onTap: () => Get.toNamed(AppRoutes.schedule_owner_list),
+            ),
+            ListTile(
+              leading: Icon(Icons.read_more_outlined),
               title: Text('Agendamentos'),
               onTap: () => Get.toNamed(AppRoutes.home),
             ),
