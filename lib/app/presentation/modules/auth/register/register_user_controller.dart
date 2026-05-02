@@ -1,0 +1,101 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:psicApp/app/core/constants/app_enums.dart';
+import 'package:psicApp/app/core/utils/validator.dart';
+import 'package:psicApp/app/presentation/shared/handlers/snack_bar_handler.dart';
+import 'package:psicApp/app/domain/models/app_user.dart';
+import 'package:psicApp/app/presentation/shared/controllers/user_controller.dart';
+import 'package:psicApp/app/data/repositories/app_user_repository.dart';
+import 'package:psicApp/app/data/repositories/patient_repository.dart';
+import 'package:psicApp/app/data/repositories/psychologist_repository.dart';
+import 'package:psicApp/app/presentation/routes/app_routes.dart';
+import 'package:psicApp/app/core/logger/logger.dart';
+
+class RegisterUserController extends GetxController {
+  final AppUserRepository appUserRepository = AppUserRepository();
+  final PatientRepository patientRepository = PatientRepository();
+  final PsychologistRepository psychologistRepository = PsychologistRepository();
+  final formKey = GlobalKey<FormState>();
+  late String userUID;
+  late String phoneNumber;
+  late String email;
+  late UserRoleType userRoleType;
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final contatoController = TextEditingController();
+
+  String? validateName(String? v) => Validator.displayNameValidator(v);
+  String? validateEmail(String? v) => Validator.emailValidator(v);
+  String? validatePhone(String? v) => Validator.phoneValidator(v);
+
+  final RxBool _isEditing = false.obs;
+  final RxBool _isLoading = false.obs;
+
+  bool get isEditing => _isEditing.value;
+
+  set isEditing(bool value) {
+    _isEditing.value = value;
+    _isEditing.refresh();
+  }
+
+  bool get isLoading => _isLoading.value;
+
+  set isLoading(bool value) {
+    _isLoading.value = value;
+    _isLoading.refresh();
+  }
+
+  @override
+  void onInit() {
+    final Map<String, dynamic>? arguments = Get.arguments;
+    if (arguments != null) {
+      userUID = arguments['userUid'];
+    }
+    super.onInit();
+  }
+
+  Future<void> createUser() async {
+    if (!(formKey.currentState?.validate() ?? false)) return;
+    try {
+      AppUser remoteUser = await appUserRepository.fetch(userUID);
+      AppUser userToSave = remoteUser.copyWith({
+        "name": nameController.text,
+        "email": emailController.text,
+        "contato":
+            contatoController.text.startsWith('+55')
+                ? contatoController.text
+                : "+55${contatoController.text}",
+        "onboardingStepType": OnboardingStepType.finished.name,
+      });
+
+      bool success = await appUserRepository.update(userToSave);
+      if (success) {
+        final profileData = {
+          'name': userToSave.name,
+          'email': userToSave.email,
+          'contact': userToSave.contato,
+        };
+
+        if (userToSave.userType == UserRoleType.patient) {
+          await patientRepository.updateOnly(userToSave.uid, profileData);
+        } else if (userToSave.userType == UserRoleType.psychologist) {
+          await psychologistRepository.updateOnly(userToSave.uid, profileData);
+        }
+
+        UserController.instance.fetch(userToSave.uid);
+        SnackBarHandler.snackBarSuccess('Usuário criado com sucesso!');
+        Get.toNamed(AppRoutes.home);
+      }
+    } catch (e) {
+      Logger.info(e.toString());
+    }
+  }
+
+  @override
+  void onClose() {
+    nameController.dispose();
+    emailController.dispose();
+    contatoController.dispose();
+    super.onClose();
+  }
+}
