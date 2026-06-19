@@ -2,7 +2,7 @@
 
 <img src="assets/images/logo.png" alt="PsicApp Logo" width="120" />
 
-# PsicApp
+# Amplsic
 
 **Plataforma mobile de saúde mental e agendamento de consultas psicológicas**
 **Mobile platform for mental health care and psychology appointment scheduling**
